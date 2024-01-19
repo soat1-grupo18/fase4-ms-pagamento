@@ -2,6 +2,7 @@ package br.com.fiap.soat.pagamentos.controllers;
 
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ConsultarStatusUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.obterPagamentosPorStatusUseCase;
 import br.com.fiap.soat.pagamentos.presenters.PagamentoPresenter;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
@@ -27,5 +28,10 @@ public class PagamentoController {
 
     public String receberConfirmacaoPagamento(ComandoDeConfirmacaoDePagamento comandoDeConfirmacaoDePagamento) {
         return receberConfirmacaoPagamentoUseCase.execute(comandoDeConfirmacaoDePagamento);
+    }
+
+    public List<PagamentoPresenter> obterPagamentosPorStatus(Status... statuses) {
+        List<Pagamentos> pagamentos = obterPagamentosPorStatusUseCase.execute(statuses);
+        return pagamentos.stream().map(PagamentoPresenter::fromDomain).collect(Collectors.toList());
     }
 }

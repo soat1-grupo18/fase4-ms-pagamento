@@ -18,7 +18,5 @@ public interface PagamentosGatewayPort {
 
     void atualizarPagamento(Pagamento pagamento);
 
-    Optional<Pagamento> obterPagamentoComPagamentoId(UUID pagamentoId);
-
     List<Pagamento> obterPagamentosPorStatus(Status... statuses);
 }

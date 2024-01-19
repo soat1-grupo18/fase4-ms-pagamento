@@ -16,4 +16,9 @@ public class UseCaseBeanConfig {
     public ReceberConfirmacaoPagamentoUseCasePort ReceberConfirmacaoPagamentoUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ReceberConfirmacaoPagamentoUseCase(pagamentoGatewayPort);
     }
+
+    @Bean
+    public ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase(PagamentosGatewayPort pagamentoGatewayPort) {
+        return new ObterPagamentosPorStatusUseCase(pagamentoGatewayPort);
+    }
 }

@@ -20,6 +20,20 @@ public class PagamentoApi {
         this.pagamentoController = pagamentoController;
     }
 
+    @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos, opcionalmente filtrada por status.")
+    @GetMapping("/pagamentos")
+    public ResponseEntity<List<PagamentoPresenter>> obterPagamentos(@RequestParam(name = "status", required = false) Status[] statuses) {
+        List<PagamentoPresenter> pagamentos;
+
+        if (statuses != null && statuses.length > 0) {
+            pagamentos = pagamentoController.obterPagamentosPorStatus(statuses);
+        } else {
+            pagamentos = pagamentoController.obterTodosPagamentos();
+        }
+
+        return ResponseEntity.ok(pagamentos);
+    }
+
     @Operation(summary = "Consultar status de pagamento", description = "Consulta o status de pagamento a partir do id do pedido.")
     @GetMapping("/pagamentos/{pedidoId}")
     public ResponseEntity<PagamentoPresenter> consultarStatus(@PathVariable UUID pedidoId) {

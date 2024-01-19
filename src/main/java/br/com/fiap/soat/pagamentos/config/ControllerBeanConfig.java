@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class ControllerBeanConfig {
     @Bean
     public PagamentoController pagamentoController(ConsultarStatusUseCasePort consultarStatusUseCase,
-                                                   ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase) {
-        return new PagamentoController(consultarStatusUseCase, receberConfirmacaoPagamentoUseCase);
+                                                   ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase,
+                                                   ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase) {
+        return new PagamentoController(consultarStatusUseCase, receberConfirmacaoPagamentoUseCase, obterPagamentosPorStatusUseCase);
     }
 }
