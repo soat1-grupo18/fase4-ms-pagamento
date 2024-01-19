@@ -1,0 +1,215 @@
+name: Build and test
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  build-and-test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run docker compose
+        run: |
+          set -e
+          docker compose up -d
+
+      - name: Wait the application becomes ready
+        run: |
+          set -e
+
+          while ! curl --fail --url http://localhost:8080/actuator/health;
+            do echo "Aguardando aplicação ficar online..."; sleep 5;
+          done;
+
+      - name: Test - Creates a customer
+        id: test-creates-a-customer
+        run: |
+          set -e
+
+          curl --fail \
+            --request POST \
+            --url http://localhost:8080/clientes \
+            --header 'Content-Type: application/json' \
+            --data '{ "nome": "John Carmack", "cpf": "11122233344", "telefone": "11911114444" }' | tee output.json
+
+          echo "cliente-id=$(cat output.json | jq --raw-output '.id')" >> $GITHUB_OUTPUT
+          echo "cliente-cpf=$(cat output.json | jq --raw-output '.telefone')" >> $GITHUB_OUTPUT
+
+      - name: Test - Retrieves the customer
+        id: test-retrieves-the-customer
+        run: |
+          set -e
+
+          curl --fail \
+            --request GET \
+            --url "http://localhost:8080/clientes/${{ steps.test-creates-a-customer.outputs.cliente-cpf }}" | tee output.json
+
+      - name: Test - Creates the first product
+        id: test-creates-the-first-product
+        run: |
+          set -e
+
+          curl --fail \
+            --request POST \
+            --url http://localhost:8080/produtos \
+            --header 'Content-Type: application/json' \
+            --data '{ "nome": "X-Tudo", "categoria": "LANCHE", "preco": 37, "descricao": "Hambúrguer com tudo que há de bom!", "imagem": "https://storage.googleapis.com/domain-images/917f20cf-8264-4464-bf5b-568562330312/products/gallery_d99517ae-188d-488a-83a5-3e6b786c2649.jpeg" }' | tee output.json
+
+            echo "produto-id=$(cat output.json | jq --raw-output '.id')" >> $GITHUB_OUTPUT
+
+      - name: Test - Creates the second product
+        id: test-creates-the-second-product
+        run: |
+          set -e
+
+          curl --fail \
+            --request POST \
+            --url http://localhost:8080/produtos \
+            --header 'Content-Type: application/json' \
+            --data '{ "nome": "Coca", "categoria": "BEBIDA", "preco": 5, "descricao": "Coca-cola geladinha!", "imagem": "https://s.yimg.com/os/creatr-uploaded-images/2022-01/3b6a08d0-7942-11ec-87e5-832af36f65e8" }' | tee output.json
+
+          echo "produto-id=$(cat output.json | jq --raw-output '.id')" >> $GITHUB_OUTPUT
+
+      - name: Test - Updates the second product
+        id: test-updates-the-second-product
+        run: |
+          set -e
+
+          curl --fail \
+            --request PUT \
+            --url "http://localhost:8080/produtos/${{ steps.test-creates-the-second-product.outputs.produto-id }}" \
+            --header 'Content-Type: application/json' \
+            --data '{ "nome": "Coca", "categoria": "BEBIDA", "preco": 7, "descricao": "Coca-cola geladinha!", "imagem": "https://s.yimg.com/os/creatr-uploaded-images/2022-01/3b6a08d0-7942-11ec-87e5-832af36f65e8" }' | tee output.json
+
+      - name: Test - List "LANCHE" products
+        id: test-list-lanche-products
+        run: |
+          set -e
+
+          curl --fail \
+            --request GET \
+            --url http://localhost:8080/produtos/LANCHE | tee output.json
+
+      - name: Test - List "BEBIDA" products
+        id: test-list-bebida-products
+        run: |
+          set -e
+
+          curl --fail \
+            --request GET \
+            --url http://localhost:8080/produtos/BEBIDA | tee output.json
+
+      - name: Test - Creates an order
+        id: test-creates-an-order
+        run: |
+          set -e
+
+          curl --fail \
+            --request POST \
+            --url http://localhost:8080/pedidos \
+            --header 'Content-Type: application/json' \
+            --data '{ "clienteId": "${{ steps.test-creates-a-customer.outputs.cliente-id }}", "itens": [ { "produtoId": "${{ steps.test-creates-the-first-product.outputs.produto-id }}", "quantidade": 2 }, { "produtoId": "${{ steps.test-creates-the-second-product.outputs.produto-id }}", "quantidade": 2 } ] }' | tee output.json
+
+            echo "pedido-id=$(cat output.json | jq --raw-output '.id')" >> $GITHUB_OUTPUT
+            echo "pagamento-id=$(cat output.json | jq --raw-output '.pagamentoId')" >> $GITHUB_OUTPUT
+
+      - name: Test - Deletes the second product
+        id: test-delete-the-second-product
+        run: |
+          set -e
+
+          curl --fail \
+            --request DELETE \
+            --url "http://localhost:8080/produtos/${{ steps.test-creates-the-second-product.outputs.produto-id }}" | tee output.json
+      
+      - name: Test - Makes the payment
+        id: test-makes-the-payment
+        run: |
+          set -e
+
+          curl --fail \
+            --request POST \
+            --url http://localhost:8080/pagamentos \
+            --header 'Content-Type: application/json' \
+            --data '{ "id": "", "live_mode": "", "type": "", "date_created": "", "user_id": "", "api_version": "", "action": "payment.created", "data": { "id": "${{ steps.test-creates-an-order.outputs.pagamento-id }}" } }' | tee output.json
+      
+      - name: Test - Sets the order as "PRONTO"
+        id: test-sets-the-order-as-pronto
+        run: |
+          set -e
+
+          curl --fail \
+            --request PUT \
+            --url "http://localhost:8080/pedidos/${{ steps.test-creates-an-order.outputs.pedido-id }}/PRONTO" | tee output.json
+
+      - name: Test - Sets the order as "FINALIZADO"
+        id: test-sets-the-order-as-finalizado
+        run: |
+          set -e
+
+          curl --fail \
+            --request PUT \
+            --url "http://localhost:8080/pedidos/${{ steps.test-creates-an-order.outputs.pedido-id }}/FINALIZADO" | tee output.json
+
+      - name: Test - List all orders
+        id: test-list-all-orders
+        run: |
+          set -e
+
+          curl --fail \
+            --request GET \
+            --url http://localhost:8080/pedidos | tee output.json
+
+      - name: Stop docker compose
+        run: |
+          docker compose stop
+
+  build-and-deploy:
+    name: Deploy
+    environment: production
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: |
+          docker build -t olegon/soat1-grupo18-api:${{ github.sha }} .
+
+      - name: Push image
+        run: |
+          docker login -u olegon -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push olegon/soat1-grupo18-api:${{ github.sha }}
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.3'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Configure kubectl
+        run: |
+          aws eks update-kubeconfig --name fiap-cluster
+
+      - name: Edit k8s manifests
+        working-directory: kubernetes
+        run: |
+          sed -i 's/image: APPLICATION_IMAGE_HOLDER/image: olegon\/soat1-grupo18-api:${{ github.sha }}/' deployment-api.yaml
+          cat deployment-api.yaml
+
+      - name: Apply changes
+        run: |
+          kubectl apply -f kubernetes

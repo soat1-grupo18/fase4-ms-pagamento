@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pagamentos
+  labels:
+    app: pagamentos
+  annotations:
+    # docs: https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/rewrite/README.md
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  # ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /food-api(/|$)(.*)
+        backend:
+          service:
+            name: pagamentos
+            port: 
+              number: 80

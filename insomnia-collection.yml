@@ -1,0 +1,65 @@
+_type: export
+__export_format: 4
+__export_date: 2023-09-01T12:23:08.059Z
+__export_source: insomnia.desktop.app:v2023.5.5
+resources:
+  - _id: req_859c9f7d086948ae94f9bff8cfef0758
+    parentId: wrk_485f894b70144879b1e4abcaafb2913e
+    modified: 1693570743187
+    created: 1693523953460
+    url: http://localhost:8080/pagamentos/{% response 'body',
+      'req_96c286558cc84e3b97bba7dea0777669', 'b64::JC5pZA==::46b', 'never', 60
+      %}
+    name: /pagamentos/{pedidoId}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1687904609542.3516
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ee85e0e7751b45368425a960f6b7c65b
+    parentId: wrk_485f894b70144879b1e4abcaafb2913e
+    modified: 1693570753952
+    created: 1693523995392
+    url: http://localhost:8080/pagamentos
+    name: /pagamentos
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"id": "",
+        	"live_mode": "",
+        	"type": "",
+        	"date_created": "",
+        	"user_id": "",
+        	"api_version": "",
+        	"action": "payment.created",
+        	"data": {
+        		"id": "{% response 'body', 'req_96c286558cc84e3b97bba7dea0777669', 'b64::JC5wYWdhbWVudG9JZA==::46b', 'never', 60 %}"
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1687904607447.1992
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request

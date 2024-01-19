@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pagamentos
+  labels:
+    app: pagamentos
+spec:
+  selector:
+    app: pagamentos
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: ClusterIP
