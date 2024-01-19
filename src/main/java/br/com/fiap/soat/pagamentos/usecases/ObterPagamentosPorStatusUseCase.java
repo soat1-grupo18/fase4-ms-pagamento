@@ -9,15 +9,17 @@ import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusU
 import java.util.List;
 
 public class ObterPagamentosPorStatusUseCase implements ObterPagamentosPorStatusUseCasePort {
+    private final PagamentosGatewayPort pagamentoGateway;
 
-    private final PagamentoGatewayPort pagamentoGateway;
-
-    public ObterPedidosPorStatusUseCase(PagamentoGatewayPort pagamentoGateway) {
+    public ObterPagamentosPorStatusUseCase(PagamentosGatewayPort pagamentoGateway) {
         this.pagamentoGateway = pagamentoGateway;
     }
 
-    @Override
-    public List<Pedido> execute(Status... statuses) {
-        return pagamentoGateway.obterPagamentosPorStatus(statuses);
+    public List<Pagamento> execute(Status status) {
+        return pagamentoGateway.obterPagamentosPorStatus(status);
     }
 }
+
+
+
+

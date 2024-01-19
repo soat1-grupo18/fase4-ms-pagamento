@@ -36,17 +36,13 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
     @Override
     public Pagamento obterPagamento(UUID pedidoId) {
-        var pagamentoO = pagamentoRepository.findByPedidoId(pedidoId);
-        if (pagamentoO.isEmpty()) {
+        Optional<Pagamento> pagamento = Optional.ofNullable(pagamentoRepository.findByPedidoId(pedidoId));
+
+        if (pagamento.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(pedidoId);
         }
-        return pagamentoO.get(0).toDomain();
-    }
 
-    @Override
-    public List<Pagamento> obterTodosPagamentos() {
-        return StreamSupport.stream(pagamentoRepository.findAll().spliterator(), false)
-                .map(PagamentoJpaEntity::toDomain).collect(Collectors.toList());
+        return pagamento.get().toDomain();
     }
 
     @Override
@@ -68,8 +64,8 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     }
 
     @Override
-    public List<Pagamento> obterPagamentosPorStatus(Status... statuses) {
-        return pagamentoRepository.obterPagamentosPorStatus(statuses).stream()
+    public List<Pagamento> obterPagamentosPorStatus(Status status) {
+        return pagamentoRepository.obterPagamentosPorStatus(status).stream()
                 .map(PagamentoJpaEntity::toDomain).collect(Collectors.toList());
     }
 }

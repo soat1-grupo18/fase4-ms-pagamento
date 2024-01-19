@@ -81,4 +81,14 @@ public class Pagamento {
     public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
     }
+
+    public Pagamento toDomain() {
+        return new Pagamento(
+                id,
+                pedidoId,
+                total,
+                status,
+                dataDeCriacao
+        );
+    }
 }

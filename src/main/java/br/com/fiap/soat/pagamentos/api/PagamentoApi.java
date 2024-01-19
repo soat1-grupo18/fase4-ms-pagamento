@@ -1,5 +1,5 @@
 package br.com.fiap.soat.pagamentos.api;
-
+import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.api.requests.ConfirmacaoPagamentoRequest;
 import br.com.fiap.soat.pagamentos.controllers.PagamentoController;
 import br.com.fiap.soat.pagamentos.presenters.PagamentoPresenter;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
+import java.util.List;
 
 @RestController
 @Tag(name = "API de Pagamentos")
@@ -20,16 +21,12 @@ public class PagamentoApi {
         this.pagamentoController = pagamentoController;
     }
 
-    @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos, opcionalmente filtrada por status.")
+    @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos filtrada por status.")
     @GetMapping("/pagamentos")
-    public ResponseEntity<List<PagamentoPresenter>> obterPagamentos(@RequestParam(name = "status", required = false) Status[] statuses) {
+    public ResponseEntity<List<PagamentoPresenter>> obterPagamentos(@RequestParam(name = "status", required = true) Status status) {
         List<PagamentoPresenter> pagamentos;
 
-        if (statuses != null && statuses.length > 0) {
-            pagamentos = pagamentoController.obterPagamentosPorStatus(statuses);
-        } else {
-            pagamentos = pagamentoController.obterTodosPagamentos();
-        }
+        pagamentos = pagamentoController.obterPagamentosPorStatus(status);
 
         return ResponseEntity.ok(pagamentos);
     }
