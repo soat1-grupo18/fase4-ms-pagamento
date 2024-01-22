@@ -7,6 +7,7 @@ import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamen
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPagamentoUseCasePort {
@@ -25,25 +26,18 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
 
         UUID pagamentoId = comandoDeConfirmacaoDePagamento.getPagamentoId();
 
-        Pagamento pagamento = getPagamentoById(pagamentoId);
+        Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoComPagamentoId(pagamentoId);
 
-        if (pagamento == null) {
+        if (optPagamento.isPresent()) {
+            Pagamento pagamento = optPagamento.get();
+            pagamento.setStatus(Status.APROVADO);
+
+            /* TO-DO:
+                request orders microservice to approve order
+            * */
+            return String.format("Pagamento %s confirmado", pagamentoId);
+        } else {
             throw new RuntimeException("Pagamento não foi encontrado.");
         }
-
-        pagamento.setStatus(Status.APROVADO);
-
-        /* TO-DO:
-            request orders microservice to approve order
-        * */
-       // pedido.setStatusDoPedido("EM_PREPARAÇÃO");
-        return String.format("Pagamento %s confirmado", pagamentoId);
-    }
-
-    private Pagamento getPagamentoById(UUID pagamentoId) {
-        // Implement your logic to retrieve Pagamento by ID from your data source
-        // For example, you might use a repository or service to fetch the Pagamento object
-        // Return null if the Pagamento is not found
-        return null;
     }
 }

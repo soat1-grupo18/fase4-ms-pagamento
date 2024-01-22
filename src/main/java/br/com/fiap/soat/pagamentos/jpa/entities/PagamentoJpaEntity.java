@@ -20,8 +20,6 @@ public class PagamentoJpaEntity {
     private Status status;
     private LocalDateTime dataDeCriacao;
 
-
-
     @OneToMany(mappedBy = "pagamentos", cascade = CascadeType.ALL)
     public UUID getId() {
         return id;
@@ -72,6 +70,7 @@ public class PagamentoJpaEntity {
         pagamentoJpaEntity.setPedidoId(pagamento.getPedidoId());
         pagamentoJpaEntity.setTotal(pagamento.getTotal());
         pagamentoJpaEntity.setStatus(pagamento.getStatus());
+        pagamentoJpaEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
 
         return pagamentoJpaEntity;
     }

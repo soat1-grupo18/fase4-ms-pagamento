@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Component
 public class PagamentoGateway implements PagamentosGatewayPort {
@@ -35,8 +34,8 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     }
 
     @Override
-    public Pagamento obterPagamento(UUID pedidoId) {
-        Optional<Pagamento> pagamento = Optional.ofNullable(pagamentoRepository.findByPedidoId(pedidoId));
+    public Pagamento obterPagamentoComPedidoId(UUID pedidoId) {
+        Optional<Pagamento> pagamento = Optional.ofNullable(pagamentoRepository.obterPagamentoComPedidoId(pedidoId));
 
         if (pagamento.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(pedidoId);
@@ -47,14 +46,8 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
     @Override
     public Boolean consultarStatus(UUID pagamentoId) {
-        var pagamento = obterPagamento(pagamentoId);
+        var pagamento = obterPagamentoComPedidoId(pagamentoId);
         return pagamento.hasBeenApproved();
-    }
-
-    @Override
-    public void atualizarPagamento(Pagamento pagamento) {
-        PagamentoJpaEntity pagamentoJpaEntity = PagamentoJpaEntity.fromDomain(pagamento);
-        pagamentoRepository.save(pagamentoJpaEntity);
     }
 
     @Override
