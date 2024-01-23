@@ -28,8 +28,8 @@ public class PagamentoController {
     }
 
     public PagamentoPresenter consultarStatus(UUID pedidoId) {
-        Boolean pagamentoAprovado = Status.APROVADO.equals(consultarStatusUseCase.execute(pedidoId));
-        return new PagamentoPresenter(pagamentoAprovado);
+        Status status = consultarStatusUseCase.execute(pedidoId);
+        return new PagamentoPresenter(status);
     }
 
     public String receberConfirmacaoPagamento(ComandoDeConfirmacaoDePagamento comandoDeConfirmacaoDePagamento) {

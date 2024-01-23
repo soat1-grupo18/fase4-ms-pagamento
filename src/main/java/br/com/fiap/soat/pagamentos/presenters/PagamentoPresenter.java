@@ -5,27 +5,18 @@ import br.com.fiap.soat.pagamentos.entities.Status;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-
 public class PagamentoPresenter {
     private UUID id;
     private BigDecimal total;
     private Status status;
     private UUID pedidoId;
 
-    private final Boolean pagamentoAprovado;
-
-    public PagamentoPresenter(Boolean pagamentoAprovado) {
-
-        this.pagamentoAprovado = pagamentoAprovado;
-    }
-
-    public boolean isPagamentoAprovado() {
-        return pagamentoAprovado;
+    public PagamentoPresenter(Status status) {
+        this.status = status;
     }
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
-        PagamentoPresenter pagamentoPresenter = new PagamentoPresenter(pagamento.getStatus().equals(Status.APROVADO));
-
+        PagamentoPresenter pagamentoPresenter = new PagamentoPresenter(pagamento.getStatus());
         pagamentoPresenter.id = pagamento.getId();
         pagamentoPresenter.total = pagamento.getTotal();
         pagamentoPresenter.status = pagamento.getStatus();
@@ -33,18 +24,20 @@ public class PagamentoPresenter {
 
         return pagamentoPresenter;
     }
+    
     public UUID getId() {
         return id;
     }
 
-    public UUID getPedidoId() { return pedidoId; }
+    public UUID getPedidoId() { 
+        return pedidoId; 
+    }
+
     public BigDecimal getTotal() {
         return total;
     }
+
     public Status getStatus() {
         return status;
     }
-
-
-
 }

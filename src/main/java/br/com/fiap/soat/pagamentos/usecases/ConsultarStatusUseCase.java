@@ -1,5 +1,6 @@
 package br.com.fiap.soat.pagamentos.usecases;
 
+import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ConsultarStatusUseCasePort;
 
@@ -14,7 +15,7 @@ public class ConsultarStatusUseCase implements ConsultarStatusUseCasePort {
     }
 
     @Override
-    public Boolean execute(UUID pedidoId) {
+    public Status execute(UUID pedidoId) {
         return pagamentoGateway.consultarStatus(pedidoId);
     }
 }

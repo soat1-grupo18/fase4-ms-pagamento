@@ -2,15 +2,16 @@ package br.com.fiap.soat.pagamentos.interfaces.gateways;
 
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
+import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface PagamentosGatewayPort {
-    Pagamento inserirPagamento(Pagamento pedido);
-    Pagamento obterPagamentoComPedidoId(UUID pedidoId);
-    Boolean consultarStatus(UUID pagamentoId);
-    Optional<Pagamento> obterPagamentoComPagamentoId(UUID pagamentoId);
     List<Pagamento> obterPagamentosPorStatus(Status status);
+    Pagamento inserirPagamento(Pagamento pedido);
+    Optional<Pagamento> obterPagamentoComPedidoId(UUID pedidoId);
+    Optional<PagamentoJpaEntity> obterPagamentoPorId(UUID id);
+    Status consultarStatus(UUID pedidoId);
 }

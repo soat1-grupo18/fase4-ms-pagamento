@@ -34,26 +34,30 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     }
 
     @Override
-    public Pagamento obterPagamentoComPedidoId(UUID pedidoId) {
-        Optional<Pagamento> pagamento = Optional.ofNullable(pagamentoRepository.obterPagamentoComPedidoId(pedidoId));
-
-        if (pagamento.isEmpty()) {
+    public Optional<Pagamento> obterPagamentoComPedidoId(UUID pedidoId) {
+        Optional<PagamentoJpaEntity> pagamentoEntity = pagamentoRepository.findByPedidoId(pedidoId);
+    
+        if (pagamentoEntity.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(pedidoId);
         }
+    
+        return Optional.ofNullable(pagamentoEntity.get().toDomain());
+    }
+    
+    @Override
+    public Status consultarStatus(UUID pedidoId) {
+        var pagamentoOpt = obterPagamentoComPedidoId(pedidoId);
 
-        return pagamento.get().toDomain();
+        if (pagamentoOpt.isPresent()) {
+            return pagamentoOpt.get().getStatus();
+        } else {
+            throw PagamentoNaoEncontradoException.aPartirDoId(pedidoId);
+        }
     }
 
     @Override
-    public Boolean consultarStatus(UUID pagamentoId) {
-        var pagamento = obterPagamentoComPedidoId(pagamentoId);
-        return pagamento.hasBeenApproved();
-    }
-
-    @Override
-    public Optional<Pagamento> obterPagamentoComPagamentoId(UUID pagamentoId) {
-        var pagamentoO = pagamentoRepository.findById(pagamentoId);
-        return Optional.ofNullable(pagamentoO.get().toDomain());
+    public Optional<PagamentoJpaEntity> obterPagamentoPorId(UUID id) {
+        return pagamentoRepository.findById(id);
     }
 
     @Override

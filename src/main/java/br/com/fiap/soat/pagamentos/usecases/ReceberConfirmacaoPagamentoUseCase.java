@@ -1,9 +1,9 @@
 package br.com.fiap.soat.pagamentos.usecases;
 
-import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.exceptions.ConfirmacaoDePagamentoInvalidaException;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
+import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 
@@ -24,18 +24,18 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
             throw ConfirmacaoDePagamentoInvalidaException.aPartirDaAction(action);
         }
 
-        UUID pagamentoId = comandoDeConfirmacaoDePagamento.getPagamentoId();
+        UUID id = comandoDeConfirmacaoDePagamento.getPagamentoId();
 
-        Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoComPagamentoId(pagamentoId);
+        Optional<PagamentoJpaEntity> optPagamento = pagamentoGateway.obterPagamentoPorId(id);
 
         if (optPagamento.isPresent()) {
-            Pagamento pagamento = optPagamento.get();
+            PagamentoJpaEntity pagamento = optPagamento.get();
             pagamento.setStatus(Status.APROVADO);
 
             /* TO-DO:
                 request orders microservice to approve order
             * */
-            return String.format("Pagamento %s confirmado", pagamentoId);
+            return String.format("Pagamento %s confirmado", id);
         } else {
             throw new RuntimeException("Pagamento não foi encontrado.");
         }

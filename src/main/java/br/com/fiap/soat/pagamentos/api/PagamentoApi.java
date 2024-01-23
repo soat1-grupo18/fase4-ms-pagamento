@@ -33,8 +33,8 @@ public class PagamentoApi {
 
     @Operation(summary = "Consultar status de pagamento", description = "Consulta o status de pagamento a partir do id do pedido.")
     @GetMapping("/pagamentos/{pedidoId}")
-    public ResponseEntity<PagamentoPresenter> consultarStatus(@PathVariable UUID pedidoId) {
-        return ResponseEntity.ok(this.pagamentoController.consultarStatus(pedidoId));
+    public ResponseEntity<PagamentoPresenter> consultarStatusPorPedidoId(@PathVariable UUID pedidoId) {
+        return ResponseEntity.ok(pagamentoController.consultarStatus(pedidoId));
     }
 
     @Operation(summary = "Receber confirmaçào de pagamento (Webhook)",
@@ -44,6 +44,6 @@ public class PagamentoApi {
                     "- data.id: O id de pagamento registrado no checkout de pedido.")
     @PostMapping("/pagamentos")
     public ResponseEntity<String> receberConfirmacao(@RequestBody ConfirmacaoPagamentoRequest confirmacaoPagamentoRequest) {
-        return ResponseEntity.ok(this.pagamentoController.receberConfirmacaoPagamento(confirmacaoPagamentoRequest.toDomain()));
+        return ResponseEntity.ok(pagamentoController.receberConfirmacaoPagamento(confirmacaoPagamentoRequest.toDomain()));
     }
 }
