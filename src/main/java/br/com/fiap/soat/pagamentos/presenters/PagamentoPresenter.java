@@ -22,10 +22,6 @@ public class PagamentoPresenter {
     }
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
-        if (pagamento == null) {
-            return null;
-        }
-
         return new PagamentoPresenter(
                 pagamento.getId(),
                 pagamento.getPedidoId(),
