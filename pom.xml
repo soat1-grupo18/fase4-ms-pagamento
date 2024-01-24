@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.fiap.soat</groupId>
-	<artifactId>techChallenge</artifactId>
+	<artifactId>pagamentos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>techChallenge</name>
-	<description>Tech Challenge SOAT - Grupo 18</description>
+	<name>pagamentos</name>
+	<description>Tech Challenge SOAT: Pagamentos - Grupo 18</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
