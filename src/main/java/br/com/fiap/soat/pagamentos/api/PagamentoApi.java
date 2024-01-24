@@ -41,8 +41,8 @@ public class PagamentoApi {
     }
 
     @Operation(summary = "Consultar status de pagamento", description = "Consulta o status de pagamento a partir do id do pedido.")
-    @GetMapping("/pagamentos/{pedidoId}")
-    public ResponseEntity<PagamentoPresenter> obterPagamentoPorPedidoId(@PathVariable UUID pedidoId) {
+    @GetMapping("/pagamentos?pedido_id={pedidoId}")
+    public ResponseEntity<PagamentoPresenter> obterPagamentoPorPedidoId(@RequestParam(name = "pedido_id", required = true) UUID pedidoId) {
         return ResponseEntity.ok(pagamentoController.obterPagamentoPorPedidoId(pedidoId));
     }
 

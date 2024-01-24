@@ -7,7 +7,6 @@ public class ComandoDeConfirmacaoDePagamento {
     private final UUID pagamentoId;
 
     public ComandoDeConfirmacaoDePagamento(String action, UUID pagamentoId) {
-
         this.action = action;
         this.pagamentoId = pagamentoId;
     }
