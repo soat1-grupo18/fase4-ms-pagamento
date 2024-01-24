@@ -66,10 +66,6 @@ public class Pagamento {
         return total;
     }
 
-    public boolean hasBeenApproved() {
-        return this.status == Status.APROVADO;
-    }
-
     public String getDataDeCriacao() {
         return dataDeCriacao;
     }

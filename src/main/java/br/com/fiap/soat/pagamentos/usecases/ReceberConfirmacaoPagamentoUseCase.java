@@ -27,7 +27,7 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
 
         UUID id = comandoDeConfirmacaoDePagamento.getPagamentoId();
 
-        Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoPorPedidoId(id);
+        Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoPorId(id);
 
         if (optPagamento.isPresent()) {
             PagamentoJpaEntity pagamento = PagamentoJpaEntity.fromDomain(optPagamento.get());

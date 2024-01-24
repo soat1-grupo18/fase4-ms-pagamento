@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public interface PagamentoRepository extends JpaRepository<PagamentoJpaEntity, UUID> {
     Optional<PagamentoJpaEntity> findById(UUID id);
-    Optional<PagamentoJpaEntity> findByPedidoId(UUID pedidoId);
 
     @Query("select p from PagamentoJpaEntity p " +
         "where p.status = :status " +

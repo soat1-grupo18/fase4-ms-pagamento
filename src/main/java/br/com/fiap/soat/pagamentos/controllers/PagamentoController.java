@@ -1,6 +1,6 @@
 package br.com.fiap.soat.pagamentos.controllers;
 
-import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentoPorPedidoIdUseCasePort;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentoPorIdUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.CriarPagamentoUseCasePort;
@@ -15,19 +15,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PagamentoController {
-
-    private final ObterPagamentoPorPedidoIdUseCasePort obterPagamentoPorPedidoIdUseCase;
+    private final ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase;
     private final ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase;
     private final ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private final CriarPagamentoUseCasePort criarPagamentoUseCase;
 
 
-    public PagamentoController(ObterPagamentoPorPedidoIdUseCasePort obterPagamentoPorPedidoIdUseCase,
+    public PagamentoController(ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase,
                                ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase,
                                ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase,
                                CriarPagamentoUseCasePort criarPagamentoUseCase) {
 
-        this.obterPagamentoPorPedidoIdUseCase = obterPagamentoPorPedidoIdUseCase;
+        this.obterPagamentoPorIdUseCase = obterPagamentoPorIdUseCase;
         this.receberConfirmacaoPagamentoUseCase = receberConfirmacaoPagamentoUseCase;
         this.obterPagamentosPorStatusUseCase = obterPagamentosPorStatusUseCase;
         this.criarPagamentoUseCase = criarPagamentoUseCase;
@@ -37,8 +36,8 @@ public class PagamentoController {
         return PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
     }
 
-    public PagamentoPresenter obterPagamentoPorPedidoId(UUID pedidoId) {
-        Pagamento pagamento = obterPagamentoPorPedidoIdUseCase.execute(pedidoId)
+    public PagamentoPresenter obterPagamentoPorId(UUID id) {
+        Pagamento pagamento = obterPagamentoPorIdUseCase.execute(id)
                 .orElseGet(() -> null);
 
         return PagamentoPresenter.fromDomain(pagamento);

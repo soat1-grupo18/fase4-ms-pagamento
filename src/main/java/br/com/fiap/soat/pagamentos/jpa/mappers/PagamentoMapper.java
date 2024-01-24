@@ -4,7 +4,6 @@ import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 
 public class PagamentoMapper {
-
     public static Pagamento toDomain(PagamentoJpaEntity entity) {
         return new Pagamento(entity.getId(), entity.getPedidoId(), entity.getTotal(), entity.getStatus(), entity.getDataDeCriacao());
     }
@@ -16,6 +15,7 @@ public class PagamentoMapper {
         pagamentoJpaEntity.setPedidoId(pagamento.getPedidoId());
         pagamentoJpaEntity.setTotal(pagamento.getTotal());
         pagamentoJpaEntity.setStatus(pagamento.getStatus());
+        pagamentoJpaEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
 
         return pagamentoJpaEntity;
     }

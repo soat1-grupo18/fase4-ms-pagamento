@@ -40,10 +40,10 @@ public class PagamentoApi {
         return ResponseEntity.ok(pagamentos);
     }
 
-    @Operation(summary = "Consultar status de pagamento", description = "Consulta o status de pagamento a partir do id do pedido.")
-    @GetMapping("/pagamentos?pedido_id={pedidoId}")
-    public ResponseEntity<PagamentoPresenter> obterPagamentoPorPedidoId(@RequestParam(name = "pedido_id", required = true) UUID pedidoId) {
-        return ResponseEntity.ok(pagamentoController.obterPagamentoPorPedidoId(pedidoId));
+    @Operation(summary = "Retorna o pagamento", description = "Retorna o pagamento a partir do id.")
+    @GetMapping("/pagamentos?id={id}")
+    public ResponseEntity<PagamentoPresenter> obterPagamentoPorId(@RequestParam(name = "id", required = true) UUID id) {
+        return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(id));
     }
 
     @Operation(summary = "Receber confirmaçào de pagamento (Webhook)",
