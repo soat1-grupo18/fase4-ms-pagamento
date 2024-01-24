@@ -7,6 +7,6 @@ public class PagamentoNaoEncontradoException extends RuntimeException {
     }
 
     public static PagamentoNaoEncontradoException aPartirDoId(UUID id) {
-        return new PagamentoNaoEncontradoException(String.format("Pagamento não encontrado pelo pedido id: ", id));
+        return new PagamentoNaoEncontradoException(String.format("Pagamento não encontrado pelo pedido id: %s", id));
     }
 }

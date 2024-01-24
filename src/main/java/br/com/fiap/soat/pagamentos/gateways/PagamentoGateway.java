@@ -37,10 +37,6 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     public Optional<Pagamento> obterPagamentoPorId(UUID id) {
         Optional<PagamentoJpaEntity> pagamentoEntity = pagamentoRepository.findById(id);
 
-        System.out.println("PAGAMENTO ENTITY START");
-        System.out.println(pagamentoEntity);
-        System.out.println("PAGAMENTO ENTITY END");
-
         if (pagamentoEntity.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(id);
         }
