@@ -41,7 +41,7 @@ public class PagamentoApi {
     }
 
     @Operation(summary = "Retorna o pagamento", description = "Retorna o pagamento a partir do id.")
-    @GetMapping("/pagamentos?id={id}")
+    @GetMapping("/pagamentos")
     public ResponseEntity<PagamentoPresenter> obterPagamentoPorId(@RequestParam(name = "id", required = true) UUID id) {
         return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(id));
     }
