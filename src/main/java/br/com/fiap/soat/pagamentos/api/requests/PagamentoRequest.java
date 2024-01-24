@@ -4,9 +4,10 @@ import br.com.fiap.soat.pagamentos.entities.Status;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.UUID;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public class PagamentoRequest {
     @NotNull(message = "O campo pedidoId é obrigatório.")
@@ -15,8 +16,9 @@ public class PagamentoRequest {
     @NotNull(message = "O campo total é obrigatório.")
     private BigDecimal total;
 
-    String dataDeCriacao = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
-            Locale.ENGLISH).format(System.currentTimeMillis());
+    Instant currentInstant = Instant.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
     public Pagamento toDomain(UUID id) {
         return new Pagamento(id, pedidoId, total, Status.PENDENTE, dataDeCriacao);

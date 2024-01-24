@@ -36,7 +36,7 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     @Override
     public Optional<Pagamento> obterPagamentoPorId(UUID id) {
         Optional<PagamentoJpaEntity> pagamentoEntity = pagamentoRepository.findById(id);
-    
+
         if (pagamentoEntity.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(id);
         }
