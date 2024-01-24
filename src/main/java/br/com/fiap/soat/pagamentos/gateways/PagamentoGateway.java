@@ -25,7 +25,7 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
     @Override
     @Transactional
-    public Pagamento inserirPagamento(Pagamento pagamento) {
+    public Pagamento criarPagamento(Pagamento pagamento) {
         PagamentoJpaEntity pagamentoJpaEntity = PagamentoJpaEntity.fromDomain(pagamento);
 
         pagamentoRepository.save(pagamentoJpaEntity);

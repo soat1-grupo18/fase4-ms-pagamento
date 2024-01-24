@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseBeanConfig {
     @Bean
+    public CriarPagamentoUseCasePort criarPagamento(PagamentosGatewayPort pagamentoGatewayPort) {
+        return new CriarPagamentoUseCase(pagamentoGatewayPort);
+    }
+    @Bean
     public ConsultarStatusUseCasePort consultarStatusUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ConsultarStatusUseCase(pagamentoGatewayPort);
     }

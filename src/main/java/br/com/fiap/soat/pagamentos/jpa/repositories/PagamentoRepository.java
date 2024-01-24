@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PagamentoRepository extends JpaRepository<PagamentoJpaEntity, UUID> {
-    Status findStatusByPedidoId(UUID pedidoId);
     Optional<PagamentoJpaEntity> findById(UUID id);
     Optional<PagamentoJpaEntity> findByPedidoId(UUID pedidoId);
 

@@ -9,7 +9,7 @@ public class Pagamento {
     private UUID pedidoId;
     private BigDecimal total;
     private Status status;
-    private LocalDateTime dataDeCriacao;
+    private String dataDeCriacao;
 
 
     public Status buscarStatus() {
@@ -25,17 +25,13 @@ public class Pagamento {
             UUID pedidoId,
             BigDecimal total,
             Status status,
-            LocalDateTime dataDeCriacao
+            String dataDeCriacao
     ) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.total = total;
         this.status = status;
         this.dataDeCriacao = dataDeCriacao;
-    }
-
-    public Pagamento() {
-        this.total = BigDecimal.ZERO;
     }
 
     public void setId(UUID id) {
@@ -74,11 +70,11 @@ public class Pagamento {
         return this.status == Status.APROVADO;
     }
 
-    public LocalDateTime getDataDeCriacao() {
+    public String getDataDeCriacao() {
         return dataDeCriacao;
     }
 
-    public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
+    public void setDataDeCriacao(String dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
     }
 

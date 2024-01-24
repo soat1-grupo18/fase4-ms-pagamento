@@ -18,7 +18,7 @@ public class PagamentoJpaEntity {
     private UUID pedidoId;
     private BigDecimal total;
     private Status status;
-    private LocalDateTime dataDeCriacao;
+    private String dataDeCriacao;
 
     @OneToMany(mappedBy = "pagamentos", cascade = CascadeType.ALL)
     public UUID getId() {
@@ -75,11 +75,11 @@ public class PagamentoJpaEntity {
         return pagamentoJpaEntity;
     }
 
-    public LocalDateTime getDataDeCriacao() {
+    public String getDataDeCriacao() {
         return dataDeCriacao;
     }
 
-    public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
+    public void setDataDeCriacao(String dataDeCriacao) {
         this.dataDeCriacao = dataDeCriacao;
     }
 }

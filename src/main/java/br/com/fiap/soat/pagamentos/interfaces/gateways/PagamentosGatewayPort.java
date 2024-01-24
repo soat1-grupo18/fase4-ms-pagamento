@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface PagamentosGatewayPort {
     List<Pagamento> obterPagamentosPorStatus(Status status);
-    Pagamento inserirPagamento(Pagamento pedido);
+    Pagamento criarPagamento(Pagamento pedido);
     Optional<Pagamento> obterPagamentoComPedidoId(UUID pedidoId);
     Optional<PagamentoJpaEntity> obterPagamentoPorId(UUID id);
     Status consultarStatus(UUID pedidoId);
