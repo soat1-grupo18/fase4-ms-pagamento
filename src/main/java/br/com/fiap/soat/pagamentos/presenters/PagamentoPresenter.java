@@ -7,37 +7,48 @@ import java.util.UUID;
 
 public class PagamentoPresenter {
     private UUID id;
-    private BigDecimal total;
-    private Status status;
     private UUID pedidoId;
+    private Status status;
+    private BigDecimal total;
+    private String dataDeCriacao;
 
-    public PagamentoPresenter(Status status) {
+
+    public PagamentoPresenter(UUID id, UUID pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
+        this.id = id;
+        this.pedidoId = pedidoId;
         this.status = status;
+        this.total = total;
+        this.dataDeCriacao = dataDeCriacao;
     }
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
-        PagamentoPresenter pagamentoPresenter = new PagamentoPresenter(pagamento.getStatus());
-        pagamentoPresenter.id = pagamento.getId();
-        pagamentoPresenter.total = pagamento.getTotal();
-        pagamentoPresenter.status = pagamento.getStatus();
-        pagamentoPresenter.pedidoId = pagamento.getPedidoId();
+        if (pagamento == null) {
+            return null;
+        }
 
-        return pagamentoPresenter;
+        return new PagamentoPresenter(
+                pagamento.getId(),
+                pagamento.getPedidoId(),
+                pagamento.getStatus(),
+                pagamento.getTotal(),
+                pagamento.getDataDeCriacao()
+        );
     }
-    
+
     public UUID getId() {
         return id;
     }
-
     public UUID getPedidoId() { 
         return pedidoId; 
     }
-
     public BigDecimal getTotal() {
         return total;
     }
-
     public Status getStatus() {
         return status;
     }
+    public String getDataDeCriacao() {
+        return dataDeCriacao;
+    }
+
 }

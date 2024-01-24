@@ -1,6 +1,6 @@
 package br.com.fiap.soat.pagamentos.controllers;
 
-import br.com.fiap.soat.pagamentos.interfaces.usecases.ConsultarStatusUseCasePort;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentoPorPedidoIdUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.CriarPagamentoUseCasePort;
@@ -11,22 +11,23 @@ import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagament
 
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PagamentoController {
 
-    private final ConsultarStatusUseCasePort consultarStatusUseCase;
+    private final ObterPagamentoPorPedidoIdUseCasePort obterPagamentoPorPedidoIdUseCase;
     private final ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase;
     private final ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private final CriarPagamentoUseCasePort criarPagamentoUseCase;
 
 
-    public PagamentoController(ConsultarStatusUseCasePort consultarStatusUseCase,
+    public PagamentoController(ObterPagamentoPorPedidoIdUseCasePort obterPagamentoPorPedidoIdUseCase,
                                ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase,
                                ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase,
                                CriarPagamentoUseCasePort criarPagamentoUseCase) {
 
-        this.consultarStatusUseCase = consultarStatusUseCase;
+        this.obterPagamentoPorPedidoIdUseCase = obterPagamentoPorPedidoIdUseCase;
         this.receberConfirmacaoPagamentoUseCase = receberConfirmacaoPagamentoUseCase;
         this.obterPagamentosPorStatusUseCase = obterPagamentosPorStatusUseCase;
         this.criarPagamentoUseCase = criarPagamentoUseCase;
@@ -36,9 +37,11 @@ public class PagamentoController {
         return PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
     }
 
-    public PagamentoPresenter consultarStatus(UUID pedidoId) {
-        Status status = consultarStatusUseCase.execute(pedidoId);
-        return new PagamentoPresenter(status);
+    public PagamentoPresenter obterPagamentoPorPedidoId(UUID pedidoId) {
+        Pagamento pagamento = obterPagamentoPorPedidoIdUseCase.execute(pedidoId)
+                .orElseGet(() -> null);
+
+        return PagamentoPresenter.fromDomain(pagamento);
     }
 
     public String receberConfirmacaoPagamento(ComandoDeConfirmacaoDePagamento comandoDeConfirmacaoDePagamento) {

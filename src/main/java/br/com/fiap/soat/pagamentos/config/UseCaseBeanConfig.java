@@ -12,8 +12,8 @@ public class UseCaseBeanConfig {
         return new CriarPagamentoUseCase(pagamentoGatewayPort);
     }
     @Bean
-    public ConsultarStatusUseCasePort consultarStatusUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
-        return new ConsultarStatusUseCase(pagamentoGatewayPort);
+    public ObterPagamentoPorPedidoIdUseCasePort obterPagamentoPorPedidoIdUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
+        return new ObterPagamentoPorPedidoIdUseCase(pagamentoGatewayPort);
     }
 
     @Bean

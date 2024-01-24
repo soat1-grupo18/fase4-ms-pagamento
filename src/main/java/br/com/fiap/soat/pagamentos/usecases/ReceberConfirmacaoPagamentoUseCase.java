@@ -1,5 +1,6 @@
 package br.com.fiap.soat.pagamentos.usecases;
 
+import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.exceptions.ConfirmacaoDePagamentoInvalidaException;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
@@ -26,10 +27,10 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
 
         UUID id = comandoDeConfirmacaoDePagamento.getPagamentoId();
 
-        Optional<PagamentoJpaEntity> optPagamento = pagamentoGateway.obterPagamentoPorId(id);
+        Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoPorPedidoId(id);
 
         if (optPagamento.isPresent()) {
-            PagamentoJpaEntity pagamento = optPagamento.get();
+            PagamentoJpaEntity pagamento = PagamentoJpaEntity.fromDomain(optPagamento.get());
             pagamento.setStatus(Status.APROVADO);
 
             /* TO-DO:
