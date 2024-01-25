@@ -7,7 +7,7 @@ resources:
     parentId: wrk_485f894b70144879b1e4abcaafb2913e
     modified: 1693570743187
     created: 1693523953460
-    url: http://localhost:8080/pagamentos/{% response 'body',
+    url: http://localhost:8083/pagamentos/{% response 'body',
       'req_96c286558cc84e3b97bba7dea0777669', 'b64::JC5pZA==::46b', 'never', 60
       %}
     name: /pagamentos/{pedidoId}
@@ -30,7 +30,7 @@ resources:
     parentId: wrk_485f894b70144879b1e4abcaafb2913e
     modified: 1693570753952
     created: 1693523995392
-    url: http://localhost:8080/pagamentos
+    url: http://localhost:8083/pagamentos
     name: /pagamentos
     description: ""
     method: POST

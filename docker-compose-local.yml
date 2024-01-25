@@ -4,9 +4,10 @@ services:
   db:
     image: postgres:15
     restart: always
-    container_name: db
+    container_name: pagamento_dbhost
     environment:
+      - POSTGRES_DB=pagamento_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5432:5432
+      - 5435:5432
