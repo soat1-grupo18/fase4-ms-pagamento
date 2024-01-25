@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: tech-challenge
+    container_name: pagamentos
     restart: always
     ports:
       - 8080:8080
