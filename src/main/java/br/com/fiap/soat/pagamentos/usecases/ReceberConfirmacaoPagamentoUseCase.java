@@ -7,10 +7,12 @@ import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamen
 import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Component
 public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPagamentoUseCasePort {
     private final PagamentosGatewayPort pagamentoGateway;
 

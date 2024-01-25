@@ -5,9 +5,11 @@ import br.com.fiap.soat.pagamentos.entities.Status;
 
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusUseCasePort;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ObterPagamentosPorStatusUseCase implements ObterPagamentosPorStatusUseCasePort {
     private final PagamentosGatewayPort pagamentoGateway;
 

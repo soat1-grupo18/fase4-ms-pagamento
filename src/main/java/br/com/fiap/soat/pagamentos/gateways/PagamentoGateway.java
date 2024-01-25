@@ -8,6 +8,7 @@ import br.com.fiap.soat.pagamentos.exceptions.PagamentoNaoEncontradoException;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,10 +18,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class PagamentoGateway implements PagamentosGatewayPort {
+    @Autowired
     public PagamentoGateway(PagamentoRepository pagamentoRepository) {
         this.pagamentoRepository = pagamentoRepository;
     }
 
+    @Autowired
     private final PagamentoRepository pagamentoRepository;
 
     @Override
