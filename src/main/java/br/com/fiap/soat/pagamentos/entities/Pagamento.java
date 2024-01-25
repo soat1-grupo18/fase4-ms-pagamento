@@ -34,6 +34,10 @@ public class Pagamento {
         this.dataDeCriacao = dataDeCriacao;
     }
 
+    public Pagamento() {
+        this.total = BigDecimal.ZERO;
+    }
+
     public void setId(UUID id) {
         this.id = id;
     }
