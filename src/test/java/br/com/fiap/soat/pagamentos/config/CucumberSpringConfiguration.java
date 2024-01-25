@@ -6,5 +6,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 @CucumberContextConfiguration
 @SpringBootTest(classes = TestConfig.class)
 public class CucumberSpringConfiguration {
-
+    public CucumberSpringConfiguration() {
+        System.out.println("CucumberSpringConfiguration Context Loaded!");
+    }
 }

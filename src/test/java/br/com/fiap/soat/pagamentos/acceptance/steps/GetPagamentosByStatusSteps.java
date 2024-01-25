@@ -2,15 +2,14 @@ package br.com.fiap.soat.pagamentos.acceptance.steps;
 
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
-import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
-import br.com.fiap.soat.pagamentos.jpa.repositories.PagamentoRepository;
-import br.com.fiap.soat.pagamentos.presenters.PagamentoPresenter;
-import br.com.fiap.soat.pagamentos.usecases.CriarPagamentoUseCase;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.CriarPagamentoUseCasePort;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusUseCasePort;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class getPaymentByStatusSteps {
-    private CriarPagamentoUseCase criarPagamentoUseCase;
-    private PagamentoRepository pagamentoRepository;
-    private PagamentoPresenter pagamentoPresenter;
-
+public class GetPagamentosByStatusSteps {
+    @Autowired
+    private CriarPagamentoUseCasePort criarPagamentoUseCase;
+    @Autowired
+    private ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private List<Pagamento> foundPagamentos;
 
     @Given("there are pagamentos with status PENDENTE")
@@ -32,11 +31,10 @@ public class getPaymentByStatusSteps {
         criarPagamentoUseCase.execute(pagamento);
     }
 
-    @When("the client requests the endpoint \\\\/pagamentos\\\\?status=PENDENTE")
+    @When("the client requests the endpoint with status PENDENTE")
     public void clientRequestsEndpointWithStatusPENDENTE() {
-        List<PagamentoJpaEntity> pagamentos = pagamentoRepository.obterPagamentosPorStatus(Status.PENDENTE);
-        ArrayList foundPagamentos = new ArrayList<>(pagamentos);
-        System.out.println(foundPagamentos);
+        List<Pagamento> pagamentos = obterPagamentosPorStatusUseCase.execute(Status.PENDENTE);
+        foundPagamentos = new ArrayList<>(pagamentos);
     }
 
     @Then("a list of PENDENTE pagamentos is returned to the client")

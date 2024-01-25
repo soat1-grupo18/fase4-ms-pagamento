@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseBeanConfig {
     @Bean
-    public CriarPagamentoUseCasePort criarPagamento(PagamentosGatewayPort pagamentoGatewayPort) {
+    public CriarPagamentoUseCasePort criarPagamentoUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new CriarPagamentoUseCase(pagamentoGatewayPort);
     }
     @Bean
@@ -22,7 +22,7 @@ public class UseCaseBeanConfig {
     }
 
     @Bean
-    public ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase(PagamentosGatewayPort pagamentoGatewayPort) {
+    public ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ObterPagamentosPorStatusUseCase(pagamentoGatewayPort);
     }
 }

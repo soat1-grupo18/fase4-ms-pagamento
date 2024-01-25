@@ -12,7 +12,6 @@ public class PagamentoPresenter {
     private BigDecimal total;
     private String dataDeCriacao;
 
-
     public PagamentoPresenter(UUID id, UUID pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
         this.id = id;
         this.pedidoId = pedidoId;
@@ -46,5 +45,4 @@ public class PagamentoPresenter {
     public String getDataDeCriacao() {
         return dataDeCriacao;
     }
-
 }
