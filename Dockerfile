@@ -11,7 +11,7 @@ FROM amazoncorretto:17
 
 WORKDIR /opt/app
 
-COPY --from=build /opt/app/target/tech*.jar app.jar
+COPY --from=build /opt/app/target/pagamentos*.jar app.jar
 
 USER nobody
 
