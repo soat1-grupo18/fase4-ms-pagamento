@@ -2,11 +2,8 @@ version: '3'
 
 services:
   db:
-    image: postgres:15
+    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
     container_name: db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432

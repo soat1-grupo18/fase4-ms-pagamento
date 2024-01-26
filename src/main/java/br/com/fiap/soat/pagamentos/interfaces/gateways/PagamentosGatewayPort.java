@@ -4,6 +4,8 @@ import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import org.springframework.stereotype.Component;
 
+import software.amazon.awssdk.services.dynamodb.model.*;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

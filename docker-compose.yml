@@ -12,17 +12,14 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - AWS_REGION=us-east-2
+      - AWS_DYNAMODB_ENDPOINT=xxx
+      - AWS_ACCESS_KEY=xxx
 
   db:
-    image: postgres:15
+    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
     container_name: db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432

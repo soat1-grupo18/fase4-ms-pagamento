@@ -4,7 +4,7 @@ import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.exceptions.ConfirmacaoDePagamentoInvalidaException;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
-import br.com.fiap.soat.pagamentos.jpa.entities.PagamentoJpaEntity;
+import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
         Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoPorId(id);
 
         if (optPagamento.isPresent()) {
-            PagamentoJpaEntity pagamento = PagamentoJpaEntity.fromDomain(optPagamento.get());
+            PagamentoDynamoEntity pagamento = PagamentoDynamoEntity.fromDomain(optPagamento.get());
             pagamento.setStatus(Status.APROVADO);
 
             /* TO-DO:
