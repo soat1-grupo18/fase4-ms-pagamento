@@ -1,7 +1,6 @@
 package br.com.fiap.soat.pagamentos.api.requests;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -10,10 +9,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class PagamentoRequest {
-    @NotNull(message = "O campo pedidoId é obrigatório.")
     private UUID pedidoId;
-
-    @NotNull(message = "O campo total é obrigatório.")
     private BigDecimal total;
 
     Instant currentInstant = Instant.now();
