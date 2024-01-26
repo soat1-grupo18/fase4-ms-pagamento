@@ -6,8 +6,8 @@ services:
     restart: always
     container_name: pagamento_dbhost
     environment:
-      - DYNAMODB_DB=pagamento_db
-      - DYNAMODB_USER=dynamo
-      - DYNAMODB_PASSWORD=dynamo
+      - AWS_ACCESS_KEY_ID=pagamento_db
+      - AWS_SECRET_ACCESS_KEY=dynamo
+      - REGION=us-east-2
     ports:
       - 5435:5432

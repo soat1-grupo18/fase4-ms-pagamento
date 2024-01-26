@@ -15,14 +15,15 @@ services:
       - AWS_REGION=us-east-2
       - AWS_DYNAMODB_ENDPOINT=xxx
       - AWS_ACCESS_KEY=xxx
+      - AWS_SECRET_ACCESS_KEY=xxx
 
   db:
     image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
     container_name: pagamento_dbhost
     environment:
-      - DYNAMODB_DB=pagamento_db
-      - DYNAMODB_USER=dynamo
-      - DYNAMODB_PASSWORD=dynamo
+      AWS_ACCESS_KEY_ID: 'xxx'
+      AWS_SECRET_ACCESS_KEY: 'xxx'
+      REGION: 'us-east-2'
     ports:
       - 5435:5432
