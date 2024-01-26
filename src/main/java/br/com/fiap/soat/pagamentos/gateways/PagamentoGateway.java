@@ -50,23 +50,14 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
     @Override
     public List<Pagamento> obterPagamentosPorStatus(Status status) {
-        System.out.print("Fetching pagamentos by status... \n");
         List<PagamentoDynamoEntity> entities = pagamentoRepository.findByStatus(status);
 
-        System.out.println("Fetched " + entities.size() + " entities from repository \n");
-        System.out.println("Printing PagamentoDynamoEntity objects:");
-        for (PagamentoDynamoEntity entity : entities) {
-            System.out.println(entity);
-        }
-
         List<Pagamento> pagamentos = entities.stream()
-                .filter(Objects::nonNull)  // Filter out null elements
+                .filter(Objects::nonNull)
                 .map(PagamentoDynamoEntity::toDomain)
-                .filter(Objects::nonNull)  // Filter out null results from toDomain
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-
-        System.out.println("Mapped entities to Pagamento objects \n");
 
         return pagamentos;
     }

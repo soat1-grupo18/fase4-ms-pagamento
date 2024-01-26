@@ -29,14 +29,11 @@ public class GetPagamentosByStatusSteps {
     @Autowired
     @Qualifier("obterPagamentoPorIdUseCasePort")
     private ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase;
+
+    @Autowired
+    @Qualifier("obterPagamentosPorStatusUseCasePort")
     private ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private List<Pagamento> foundPagamentos;
-
-    public GetPagamentosByStatusSteps(
-                                      ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase) {
-        //this.criarPagamentoUseCase = criarPagamentoUseCase;
-        this.obterPagamentosPorStatusUseCase = obterPagamentosPorStatusUseCase;
-    }
 
     @Given("there are pagamentos with status PENDENTE")
     public void thereArePagamentosWithStatusPENDENTE() {

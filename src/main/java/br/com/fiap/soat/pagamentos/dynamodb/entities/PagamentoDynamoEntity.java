@@ -100,12 +100,12 @@ public class PagamentoDynamoEntity {
     public static class StatusConverter implements DynamoDBTypeConverter<String, Status> {
         @Override
         public String convert(Status status) {
-            return status.name();  // Convert enum to its name (String)
+            return status.name();
         }
 
         @Override
         public Status unconvert(String value) {
-            return Status.valueOf(value);  // Convert String to enum using valueOf
+            return Status.valueOf(value);
         }
     }
 }

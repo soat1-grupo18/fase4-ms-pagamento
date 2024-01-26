@@ -7,12 +7,14 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import org.junit.AfterClass;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.test.annotation.DirtiesContext;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
 import com.amazonaws.services.dynamodbv2.model.*;
@@ -115,6 +117,14 @@ public class TestConfig {
         @Bean
         public AmazonDynamoDB amazonDynamoDB(GenericContainer<?> dynamoDBLocalContainer) {
             return createAmazonDynamoDBBean();
+        }
+
+        @AfterClass
+        public static void stopDynamoDBLocalContainer() {
+            if (dynamoDBLocalContainer != null && dynamoDBLocalContainer.isRunning()) {
+                dynamoDBLocalContainer.stop();
+                System.out.println("DynamoDB-local local container stopped.");
+            }
         }
     }
 }

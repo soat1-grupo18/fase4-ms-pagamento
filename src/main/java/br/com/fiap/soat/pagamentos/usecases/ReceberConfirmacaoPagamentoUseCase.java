@@ -15,7 +15,6 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
     private final PagamentosGatewayPort pagamentoGateway;
 
     public ReceberConfirmacaoPagamentoUseCase(PagamentosGatewayPort pagamentoGateway) {
-
         this.pagamentoGateway = pagamentoGateway;
     }
 
