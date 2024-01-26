@@ -4,6 +4,10 @@ services:
   db:
     image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
-    container_name: db
+    container_name: pagamento_dbhost
+    environment:
+      - DYNAMODB_DB=pagamento_db
+      - DYNAMODB_USER=dynamo
+      - DYNAMODB_PASSWORD=dynamo
     ports:
-      - 5432:5432
+      - 5435:5432
