@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
 public interface ObterPagamentoPorIdUseCasePort {
-    Optional<Pagamento> execute(UUID id);
+    Optional<Pagamento> execute(String id);
 }

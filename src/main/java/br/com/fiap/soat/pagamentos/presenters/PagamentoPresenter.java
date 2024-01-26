@@ -12,8 +12,7 @@ public class PagamentoPresenter {
     private BigDecimal total;
     private String dataDeCriacao;
 
-    public PagamentoPresenter(UUID id, UUID pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
-        this.id = id;
+    public PagamentoPresenter(UUID pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
         this.pedidoId = pedidoId;
         this.status = status;
         this.total = total;
@@ -22,7 +21,6 @@ public class PagamentoPresenter {
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
         return new PagamentoPresenter(
-                pagamento.getId(),
                 pagamento.getPedidoId(),
                 pagamento.getStatus(),
                 pagamento.getTotal(),

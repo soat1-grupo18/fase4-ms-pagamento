@@ -30,7 +30,6 @@ public class DynamoDBConfig {
 
     @Bean
     public DynamoDbClient dynamoDbClient() {
-        System.out.print("I am being ignored, good!");
         return DynamoDbClient.builder()
                 .region(Region.of(awsRegion))
                 .endpointOverride(URI.create(dynamoDbEndpoint))

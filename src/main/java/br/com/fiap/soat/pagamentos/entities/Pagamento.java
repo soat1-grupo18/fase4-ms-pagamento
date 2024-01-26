@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Pagamento {
-    private UUID id;
+    private String id;
     private UUID pedidoId;
     private BigDecimal total;
     private Status status;
@@ -21,7 +21,7 @@ public class Pagamento {
     }
 
     public Pagamento(
-            UUID id,
+            String id,
             UUID pedidoId,
             BigDecimal total,
             Status status,
@@ -38,11 +38,11 @@ public class Pagamento {
         this.total = BigDecimal.ZERO;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

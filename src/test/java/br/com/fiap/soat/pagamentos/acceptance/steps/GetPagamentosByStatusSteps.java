@@ -3,6 +3,7 @@ package br.com.fiap.soat.pagamentos.acceptance.steps;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.CriarPagamentoUseCasePort;
+import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentoPorIdUseCasePort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ObterPagamentosPorStatusUseCasePort;
 
 import io.cucumber.java.en.Given;
@@ -10,6 +11,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -19,11 +21,22 @@ import java.util.List;
 import java.util.UUID;
 
 public class GetPagamentosByStatusSteps {
+
     @Autowired
+    @Qualifier("criarPagamentoUseCasePort")
     private CriarPagamentoUseCasePort criarPagamentoUseCase;
+
     @Autowired
+    @Qualifier("obterPagamentoPorIdUseCasePort")
+    private ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase;
     private ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private List<Pagamento> foundPagamentos;
+
+    public GetPagamentosByStatusSteps(
+                                      ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase) {
+        //this.criarPagamentoUseCase = criarPagamentoUseCase;
+        this.obterPagamentosPorStatusUseCase = obterPagamentosPorStatusUseCase;
+    }
 
     @Given("there are pagamentos with status PENDENTE")
     public void thereArePagamentosWithStatusPENDENTE() {
@@ -51,7 +64,6 @@ public class GetPagamentosByStatusSteps {
 
     private Pagamento criarPagamento( ) {
         var pagamento = new Pagamento();
-        pagamento.setId(UUID.randomUUID());
         pagamento.setStatus(Status.PENDENTE);
         pagamento.setPedidoId(UUID.randomUUID());
         pagamento.setDataDeCriacao(String.valueOf(LocalDateTime.now()));

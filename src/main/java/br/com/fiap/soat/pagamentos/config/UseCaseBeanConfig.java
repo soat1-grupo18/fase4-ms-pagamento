@@ -7,21 +7,23 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseBeanConfig {
-    @Bean
+    @Bean("criarPagamentoUseCasePort")
     public CriarPagamentoUseCasePort criarPagamentoUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new CriarPagamentoUseCase(pagamentoGatewayPort);
     }
-    @Bean
+
+    @Bean("obterPagamentoPorIdUseCasePort")
     public ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ObterPagamentoPorIdUseCase(pagamentoGatewayPort);
     }
 
-    @Bean
+    @Bean("receberConfirmacaoPagamentoUseCasePort")
     public ReceberConfirmacaoPagamentoUseCasePort ReceberConfirmacaoPagamentoUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ReceberConfirmacaoPagamentoUseCase(pagamentoGatewayPort);
     }
 
-    @Bean
+    @Bean("obterPagamentosPorStatusUseCasePort")
+
     public ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCasePort(PagamentosGatewayPort pagamentoGatewayPort) {
         return new ObterPagamentosPorStatusUseCase(pagamentoGatewayPort);
     }

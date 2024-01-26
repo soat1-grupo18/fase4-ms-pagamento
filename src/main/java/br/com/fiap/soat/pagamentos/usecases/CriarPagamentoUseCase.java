@@ -6,7 +6,6 @@ import br.com.fiap.soat.pagamentos.interfaces.usecases.CriarPagamentoUseCasePort
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class CriarPagamentoUseCase implements CriarPagamentoUseCasePort {
 
     private final PagamentosGatewayPort pagamentoGateway;

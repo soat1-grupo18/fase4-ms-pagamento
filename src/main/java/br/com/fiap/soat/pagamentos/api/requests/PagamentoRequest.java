@@ -20,7 +20,7 @@ public class PagamentoRequest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
     String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
-    public Pagamento toDomain(UUID id) {
+    public Pagamento toDomain(String id) {
         return new Pagamento(id, pedidoId, total, Status.PENDENTE, dataDeCriacao);
     }
 

@@ -11,7 +11,6 @@ import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagament
 
 import java.util.UUID;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PagamentoController {
@@ -19,7 +18,6 @@ public class PagamentoController {
     private final ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase;
     private final ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
     private final CriarPagamentoUseCasePort criarPagamentoUseCase;
-
 
     public PagamentoController(ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase,
                                ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase,
@@ -36,7 +34,7 @@ public class PagamentoController {
         return PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
     }
 
-    public PagamentoPresenter obterPagamentoPorId(UUID id) {
+    public PagamentoPresenter obterPagamentoPorId(String id) {
         Pagamento pagamento = obterPagamentoPorIdUseCase.execute(id)
                 .orElseGet(() -> null);
 

@@ -43,7 +43,7 @@ public class PagamentoApi {
     @Operation(summary = "Retorna o pagamento", description = "Retorna o pagamento a partir do id.")
     @GetMapping("/pagamentos/{id}")
     public ResponseEntity<PagamentoPresenter> obterPagamentoPorId(@PathVariable(name = "id", required = true) UUID id) {
-        return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(id));
+        return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(String.valueOf(id)));
     }
 
     @Operation(summary = "Receber confirmaçào de pagamento (Webhook)",
