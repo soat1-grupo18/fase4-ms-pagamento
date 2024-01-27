@@ -20,12 +20,25 @@ public class Pagamento {
     }
 
     public Pagamento(
+            String id,
             String pedidoId,
             BigDecimal total,
             Status status,
             String dataDeCriacao
     ) {
         this.id = id;
+        this.pedidoId = pedidoId;
+        this.total = total;
+        this.status = status;
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    public Pagamento(
+            String pedidoId,
+            BigDecimal total,
+            Status status,
+            String dataDeCriacao
+    ) {
         this.pedidoId = pedidoId;
         this.total = total;
         this.status = status;
@@ -78,6 +91,7 @@ public class Pagamento {
 
     public Pagamento toDomain() {
         return new Pagamento(
+                id,
                 pedidoId,
                 total,
                 status,

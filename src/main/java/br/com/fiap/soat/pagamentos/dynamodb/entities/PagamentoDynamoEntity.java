@@ -90,6 +90,7 @@ public class PagamentoDynamoEntity {
 
     public Pagamento toDomain() {
         return new Pagamento(
+                id,
                 pedidoId,
                 total,
                 status,
