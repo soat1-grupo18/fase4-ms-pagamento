@@ -2,11 +2,10 @@ package br.com.fiap.soat.pagamentos.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class Pagamento {
     private String id;
-    private UUID pedidoId;
+    private String pedidoId;
     private BigDecimal total;
     private Status status;
     private String dataDeCriacao;
@@ -16,13 +15,13 @@ public class Pagamento {
         return status;
     }
 
-    public UUID buscarPedidoId() {
+    public String buscarPedidoId() {
         return pedidoId;
     }
 
     public Pagamento(
             String id,
-            UUID pedidoId,
+            String pedidoId,
             BigDecimal total,
             Status status,
             String dataDeCriacao
@@ -46,11 +45,11 @@ public class Pagamento {
         return id;
     }
 
-    public UUID getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(UUID pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
 

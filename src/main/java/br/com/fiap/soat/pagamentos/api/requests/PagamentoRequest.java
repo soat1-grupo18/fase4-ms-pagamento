@@ -6,14 +6,13 @@ import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class PagamentoRequest {
     @NotNull(message = "O campo pedidoId é obrigatório.")
-    private UUID pedidoId;
+    private String pedidoId;
 
     @NotNull(message = "O campo total é obrigatório.")
     private BigDecimal total;
@@ -26,14 +25,14 @@ public class PagamentoRequest {
         return new Pagamento(id, pedidoId, total, Status.PENDENTE, dataDeCriacao);
     }
 
-    public UUID getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
     public BigDecimal getTotal() {
         return total;
     }
 
-    public void setPedidoId(UUID pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
     public void setTotal(BigDecimal total) {

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,8 +35,8 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     }
 
     @Override
-    public Optional<Pagamento> obterPagamentoPorId(UUID id) {
-        Optional<PagamentoDynamoEntity> pagamentoEntity = pagamentoRepository.findById(String.valueOf(id));
+    public Optional<Pagamento> obterPagamentoPorId(String id) {
+        Optional<PagamentoDynamoEntity> pagamentoEntity = pagamentoRepository.findById(id);
 
         if (pagamentoEntity.isEmpty()) {
             throw PagamentoNaoEncontradoException.aPartirDoId(id);
