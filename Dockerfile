@@ -5,7 +5,7 @@ WORKDIR /opt/app
 COPY src ./src
 COPY pom.xml .
 
-RUN mvn package
+RUN mvn clean package
 
 FROM amazoncorretto:17
 
