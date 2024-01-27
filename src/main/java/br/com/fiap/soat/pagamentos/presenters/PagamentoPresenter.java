@@ -1,10 +1,15 @@
 package br.com.fiap.soat.pagamentos.presenters;
+import br.com.fiap.soat.pagamentos.api.requests.PagamentoRequest;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
 public class PagamentoPresenter {
+    private static final Logger logger = LoggerFactory.getLogger(PagamentoRequest.class);
+
     private String id;
     private String pedidoId;
     private Status status;
@@ -20,7 +25,7 @@ public class PagamentoPresenter {
     }
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
-        System.out.println("PagamentoPresenter 2: " + pagamento);
+        logger.info("PagamentoPresenter 2: " + pagamento);
 
         return new PagamentoPresenter(
                 pagamento.getId(),
