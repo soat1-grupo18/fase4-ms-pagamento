@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pagamentos
+  name: ms-pedido
   labels:
-    app: pagamentos
+    app: ms-pedido
 spec:
   selector:
-    app: pagamentos
+    app: ms-pedido
   ports:
   - port: 80
     targetPort: 8080
