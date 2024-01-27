@@ -1,9 +1,5 @@
 package br.com.fiap.soat.pagamentos.api.requests;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 import jakarta.validation.constraints.NotNull;
 
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
@@ -15,8 +11,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class PagamentoRequest {
-    private static final Logger logger = LoggerFactory.getLogger(PagamentoRequest.class);
-
     @NotNull(message = "O campo pedidoId é obrigatório.")
     private String pedidoId;
 
@@ -28,8 +22,12 @@ public class PagamentoRequest {
     String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
     public Pagamento toDomain() {
+
         Pagamento pagamento = new Pagamento(pedidoId, total, Status.PENDENTE, dataDeCriacao);
-        logger.info("Pagamento: {}", pagamento.toString());
+        System.out.print("*************************************");
+        System.out.println(pagamento);
+        System.out.print("*************************************");
+
         return pagamento;
     }
 

@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GetPagamentosByStatusSteps {
 
@@ -62,7 +61,7 @@ public class GetPagamentosByStatusSteps {
     private Pagamento criarPagamento( ) {
         var pagamento = new Pagamento();
         pagamento.setStatus(Status.PENDENTE);
-        pagamento.setPedidoId(String.valueOf(UUID.randomUUID()));
+        pagamento.setPedidoId("PedidoTeste123");
         pagamento.setDataDeCriacao(String.valueOf(LocalDateTime.now()));
 
         return pagamento;

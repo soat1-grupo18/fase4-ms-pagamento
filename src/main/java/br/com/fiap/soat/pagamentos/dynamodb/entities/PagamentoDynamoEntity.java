@@ -9,8 +9,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttri
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
 @DynamoDbBean
@@ -79,9 +77,6 @@ public class PagamentoDynamoEntity {
         this.dataDeCriacao = dataDeCriacao;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(PagamentoRequest.class);
-
-
     public static PagamentoDynamoEntity fromDomain(Pagamento pagamento) {
         PagamentoDynamoEntity dynamoEntity = new PagamentoDynamoEntity();
 
@@ -90,7 +85,6 @@ public class PagamentoDynamoEntity {
         dynamoEntity.setTotal(pagamento.getTotal());
         dynamoEntity.setStatus(pagamento.getStatus());
         dynamoEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
-        logger.info("dynamoEntity: " + dynamoEntity);
 
         return dynamoEntity;
     }

@@ -9,15 +9,11 @@ import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.presenters.PagamentoPresenter;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PagamentoController {
-    private static final Logger logger = LoggerFactory.getLogger(PagamentoRequest.class);
-
     private final ObterPagamentoPorIdUseCasePort obterPagamentoPorIdUseCase;
     private final ReceberConfirmacaoPagamentoUseCasePort receberConfirmacaoPagamentoUseCase;
     private final ObterPagamentosPorStatusUseCasePort obterPagamentosPorStatusUseCase;
@@ -35,9 +31,7 @@ public class PagamentoController {
     }
 
     public PagamentoPresenter criarPagamento(Pagamento pagamento) {
-        PagamentoPresenter pgt = PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
-        logger.info("PagamentoPresenter: {}", pgt);
-        return pgt;
+        return PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
     }
 
     public PagamentoPresenter obterPagamentoPorId(String id) {
