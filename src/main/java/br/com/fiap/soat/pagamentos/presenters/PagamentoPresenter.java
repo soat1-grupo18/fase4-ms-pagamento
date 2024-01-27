@@ -1,18 +1,18 @@
 package br.com.fiap.soat.pagamentos.presenters;
+import br.com.fiap.soat.pagamentos.api.requests.PagamentoRequest;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class PagamentoPresenter {
-    private UUID id;
-    private UUID pedidoId;
+    private String id;
+    private String pedidoId;
     private Status status;
     private BigDecimal total;
     private String dataDeCriacao;
 
-    public PagamentoPresenter(UUID id, UUID pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
+    public PagamentoPresenter(String id, String pedidoId, Status status, BigDecimal total, String dataDeCriacao) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.status = status;
@@ -30,11 +30,11 @@ public class PagamentoPresenter {
         );
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
-    public UUID getPedidoId() { 
-        return pedidoId; 
+    public String getPedidoId() {
+        return pedidoId;
     }
     public BigDecimal getTotal() {
         return total;

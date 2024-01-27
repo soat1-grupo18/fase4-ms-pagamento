@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-import java.util.UUID;
 import java.util.List;
 
 @RestController
@@ -26,8 +25,7 @@ public class PagamentoApi {
             description = "Cria um pagamento a partir de um id do pedido e seu total.")
     @PostMapping("/pagamentos")
     public ResponseEntity<PagamentoPresenter> criarPagamento(@Valid @RequestBody PagamentoRequest pagamentoRequest) {
-
-        return ResponseEntity.ok(pagamentoController.criarPagamento(pagamentoRequest.toDomain(null)));
+        return ResponseEntity.ok(pagamentoController.criarPagamento(pagamentoRequest.toDomain()));
     }
 
     @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos filtrada por status.")
@@ -42,7 +40,7 @@ public class PagamentoApi {
 
     @Operation(summary = "Retorna o pagamento", description = "Retorna o pagamento a partir do id.")
     @GetMapping("/pagamentos/{id}")
-    public ResponseEntity<PagamentoPresenter> obterPagamentoPorId(@PathVariable(name = "id", required = true) UUID id) {
+    public ResponseEntity<PagamentoPresenter> obterPagamentoPorId(@PathVariable(name = "id", required = true) String id) {
         return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(id));
     }
 

@@ -12,18 +12,14 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://pagamento_dbhost:5432/pagamento_db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - AWS_REGION="$${{ secrets.AWS_REGION }}"
+      - AWS_ACCESS_KEY="$${{ secrets.AWS_ACCESS_KEY }}"
+      - AWS_SECRET_KEY="$${{ secrets.AWS_SECRET_KEY }}"
+      - AWS_DYNAMODB_ENDPOINT="$${{ secrets.AWS_DYNAMODB_ENDPOINT }}"
 
   db:
-    image: postgres:15
+    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
     container_name: pagamento_dbhost
-    environment:
-      - POSTGRES_DB=pagamento_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     ports:
       - 5435:5432

@@ -5,13 +5,13 @@ WORKDIR /opt/app
 COPY src ./src
 COPY pom.xml .
 
-RUN mvn package
+RUN mvn clean package
 
 FROM amazoncorretto:17
 
 WORKDIR /opt/app
 
-COPY --from=build /opt/app/target/tech*.jar app.jar
+COPY --from=build /opt/app/target/msPagamentoTechChallenge*.jar app.jar
 
 USER nobody
 

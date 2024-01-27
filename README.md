@@ -33,8 +33,10 @@ Projeto realizado durante o quarto módulo da Pós Tech Software Architecture da
 ### Tecnologias utilizadas
 
 - Spring Boot 3.1
-- Postgres 15
+- DynamoDB
 - Java 17
+- Cucumber
+- Junit
 - Docker
 - Github Actions
   - Para validar o docker-compose.yaml e fazer alguns testes e2e

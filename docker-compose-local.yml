@@ -2,12 +2,12 @@ version: '3'
 
 services:
   db:
-    image: postgres:15
+    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
     restart: always
     container_name: pagamento_dbhost
     environment:
-      - POSTGRES_DB=pagamento_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - AWS_ACCESS_KEY_ID=pagamento_db
+      - AWS_SECRET_ACCESS_KEY=dynamo
+      - REGION=us-east-2
     ports:
       - 5435:5432
