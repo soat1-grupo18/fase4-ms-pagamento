@@ -30,7 +30,9 @@ public class PagamentoController {
     }
 
     public PagamentoPresenter criarPagamento(Pagamento pagamento) {
-        return PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
+        PagamentoPresenter pgt = PagamentoPresenter.fromDomain(criarPagamentoUseCase.execute(pagamento));
+        System.out.println("PagamentoPresenter: " + pgt);
+        return pgt;
     }
 
     public PagamentoPresenter obterPagamentoPorId(String id) {

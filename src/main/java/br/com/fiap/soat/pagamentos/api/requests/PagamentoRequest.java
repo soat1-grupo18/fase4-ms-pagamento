@@ -1,5 +1,6 @@
 package br.com.fiap.soat.pagamentos.api.requests;
 
+import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import jakarta.validation.constraints.NotNull;
 
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
@@ -22,7 +23,9 @@ public class PagamentoRequest {
     String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
     public Pagamento toDomain() {
-        return new Pagamento(pedidoId, total, Status.PENDENTE, dataDeCriacao);
+        Pagamento pagamento = new Pagamento(pedidoId, total, Status.PENDENTE, dataDeCriacao);
+        System.out.println("Pagamento: " + pagamento.toString());
+        return pagamento;
     }
 
     public String getPedidoId() {

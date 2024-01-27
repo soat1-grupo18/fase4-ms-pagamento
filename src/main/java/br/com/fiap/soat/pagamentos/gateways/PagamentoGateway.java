@@ -23,13 +23,18 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
     @Override
     public Pagamento criarPagamento(Pagamento pagamento) {
+        System.out.println("PagamentoGateway 2: " + pagamento);
+
         PagamentoDynamoEntity pagamentoDynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
+        System.out.println("PagamentoGateway pagamentoDynamoEntity: " + pagamentoDynamoEntity);
 
         try {
             pagamentoRepository.save(pagamentoDynamoEntity);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+
+        System.out.println("PagamentoGateway return: " + pagamentoDynamoEntity.toDomain());
 
         return pagamentoDynamoEntity.toDomain();
     }

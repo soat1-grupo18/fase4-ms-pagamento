@@ -20,6 +20,8 @@ public class PagamentoPresenter {
     }
 
     public static PagamentoPresenter fromDomain(Pagamento pagamento) {
+        System.out.println("PagamentoPresenter 2: " + pagamento);
+
         return new PagamentoPresenter(
                 pagamento.getId(),
                 pagamento.getPedidoId(),
@@ -32,8 +34,8 @@ public class PagamentoPresenter {
     public String getId() {
         return id;
     }
-    public String getPedidoId() { 
-        return pedidoId; 
+    public String getPedidoId() {
+        return pedidoId;
     }
     public BigDecimal getTotal() {
         return total;
