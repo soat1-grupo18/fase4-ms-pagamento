@@ -1,12 +1,10 @@
 package br.com.fiap.soat.pagamentos.config;
 
-import br.com.fiap.soat.pagamentos.dynamodb.repositories.PagamentoRepository;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,10 +37,18 @@ public class DynamoDBConfig {
         return new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
     }
 
+
     @Bean(name = "amazonDynamoDB")
     public AmazonDynamoDB amazonDynamoDB() {
-        return AmazonDynamoDBClientBuilder.standard()
-                .withCredentials(amazonAWSCredentialsProvider())
-                .withRegion(awsRegion).build();
+        try {
+            System.out.println("******** ABOUT TO CREATE DYNAMODBCLIENT *********");
+            return AmazonDynamoDBClientBuilder.standard()
+                    .withCredentials(amazonAWSCredentialsProvider())
+                    .withRegion(awsRegion).build();
+        } catch (Exception e) {
+            System.out.println("ERROR CONNECTION TO DYNAMODB CLIENT: ");
+            e.printStackTrace();  // Print the stack trace for better error diagnostics
+            throw e;
+        }
     }
 }
