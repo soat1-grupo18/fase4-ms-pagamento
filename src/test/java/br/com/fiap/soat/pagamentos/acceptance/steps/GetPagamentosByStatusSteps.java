@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
@@ -59,11 +60,6 @@ public class GetPagamentosByStatusSteps {
     }
 
     private Pagamento criarPagamento( ) {
-        var pagamento = new Pagamento();
-        pagamento.setStatus(Status.PENDENTE);
-        pagamento.setPedidoId("PedidoTeste123");
-        pagamento.setDataDeCriacao(String.valueOf(LocalDateTime.now()));
-
-        return pagamento;
+        return new Pagamento("PedidoTeste123", new BigDecimal(70.50), Status.PENDENTE, String.valueOf(LocalDateTime.now()));
     }
 }

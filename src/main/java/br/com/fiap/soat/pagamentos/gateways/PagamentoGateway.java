@@ -49,7 +49,9 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     @Override
     public List<Pagamento> obterPagamentosPorStatus(Status status) {
         List<PagamentoDynamoEntity> entities = pagamentoRepository.findByStatus(status);
-
+        System.out.print("\n ***** RESULT ******: \n");
+        System.out.print(entities);
+        System.out.print("\n *********************************** \n");
         List<Pagamento> pagamentos = entities.stream()
                 .filter(Objects::nonNull)
                 .map(PagamentoDynamoEntity::toDomain)

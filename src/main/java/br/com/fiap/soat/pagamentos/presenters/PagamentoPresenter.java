@@ -1,5 +1,4 @@
 package br.com.fiap.soat.pagamentos.presenters;
-import br.com.fiap.soat.pagamentos.api.requests.PagamentoRequest;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 

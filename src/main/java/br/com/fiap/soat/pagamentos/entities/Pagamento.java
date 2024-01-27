@@ -1,7 +1,6 @@
 package br.com.fiap.soat.pagamentos.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 public class Pagamento {
     private String id;
@@ -43,10 +42,6 @@ public class Pagamento {
         this.total = total;
         this.status = status;
         this.dataDeCriacao = dataDeCriacao;
-    }
-
-    public Pagamento() {
-        this.total = BigDecimal.ZERO;
     }
 
     public void setId(String id) {
