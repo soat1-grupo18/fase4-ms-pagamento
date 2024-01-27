@@ -20,7 +20,6 @@ public class Pagamento {
     }
 
     public Pagamento(
-            String id,
             String pedidoId,
             BigDecimal total,
             Status status,
@@ -79,7 +78,6 @@ public class Pagamento {
 
     public Pagamento toDomain() {
         return new Pagamento(
-                id,
                 pedidoId,
                 total,
                 status,

@@ -25,7 +25,7 @@ public class PagamentoApi {
             description = "Cria um pagamento a partir de um id do pedido e seu total.")
     @PostMapping("/pagamentos")
     public ResponseEntity<PagamentoPresenter> criarPagamento(@Valid @RequestBody PagamentoRequest pagamentoRequest) {
-        return ResponseEntity.ok(pagamentoController.criarPagamento(pagamentoRequest.toDomain(null)));
+        return ResponseEntity.ok(pagamentoController.criarPagamento(pagamentoRequest.toDomain()));
     }
 
     @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos filtrada por status.")

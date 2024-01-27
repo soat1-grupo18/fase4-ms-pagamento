@@ -79,6 +79,8 @@ public class PagamentoDynamoEntity {
     public static PagamentoDynamoEntity fromDomain(Pagamento pagamento) {
         PagamentoDynamoEntity dynamoEntity = new PagamentoDynamoEntity();
 
+        dynamoEntity.setId(pagamento.getId());
+        dynamoEntity.setPedidoId(pagamento.getPedidoId());
         dynamoEntity.setTotal(pagamento.getTotal());
         dynamoEntity.setStatus(pagamento.getStatus());
         dynamoEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
@@ -88,7 +90,6 @@ public class PagamentoDynamoEntity {
 
     public Pagamento toDomain() {
         return new Pagamento(
-                id,
                 pedidoId,
                 total,
                 status,
