@@ -1,39 +1,48 @@
 package br.com.fiap.soat.pagamentos.config;
 
+import br.com.fiap.soat.pagamentos.dynamodb.repositories.PagamentoRepository;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.context.annotation.Profile;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
-import java.net.URI;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 
 @Configuration
 @Profile("!test")
 public class DynamoDBConfig {
-
     @Value("${aws.region}")
     private String awsRegion;
 
     @Value("${aws.dynamodb.endpoint}")
     private String dynamoDbEndpoint;
 
-    @Value("${AWS_ACCESS_KEY_ID}")
+    @Value("${aws.accessKey}")
     private String awsAccessKeyId;
 
-    @Value("${AWS_SECRET_ACCESS_KEY}")
+    @Value("${aws.secretKey}")
     private String awsSecretAccessKey;
 
+    public AWSCredentialsProvider amazonAWSCredentialsProvider() {
+        return new AWSStaticCredentialsProvider(amazonAWSCredentials());
+    }
+
     @Bean
-    public DynamoDbClient dynamoDbClient() {
-        return DynamoDbClient.builder()
-                .region(Region.of(awsRegion))
-                .endpointOverride(URI.create(dynamoDbEndpoint))
-                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsAccessKeyId, awsSecretAccessKey)))
-                .build();
+    public AWSCredentials amazonAWSCredentials() {
+        return new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
+    }
+
+    @Bean(name = "amazonDynamoDB")
+    public AmazonDynamoDB amazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder.standard()
+                .withCredentials(amazonAWSCredentialsProvider())
+                .withRegion(awsRegion).build();
     }
 }

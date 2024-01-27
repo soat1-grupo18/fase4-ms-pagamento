@@ -9,7 +9,6 @@ import br.com.fiap.soat.pagamentos.presenters.PagamentoPresenter;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 
-import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
 

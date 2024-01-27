@@ -6,8 +6,6 @@ import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import br.com.fiap.soat.pagamentos.dynamodb.repositories.PagamentoRepository;
 import br.com.fiap.soat.pagamentos.exceptions.PagamentoNaoEncontradoException;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
