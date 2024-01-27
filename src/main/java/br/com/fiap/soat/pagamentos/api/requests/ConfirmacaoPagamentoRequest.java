@@ -3,8 +3,6 @@ package br.com.fiap.soat.pagamentos.api.requests;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.UUID;
-
 public class ConfirmacaoPagamentoRequest {
 
     private String id;

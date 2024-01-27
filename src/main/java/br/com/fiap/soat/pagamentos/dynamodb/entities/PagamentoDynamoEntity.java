@@ -9,7 +9,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @DynamoDbBean
 @DynamoDBTable(tableName = "Pagamentos")

@@ -1,7 +1,4 @@
 package br.com.fiap.soat.pagamentos.usecases.model;
-
-import java.util.UUID;
-
 public class ComandoDeConfirmacaoDePagamento {
     private final String action;
     private final String pagamentoId;

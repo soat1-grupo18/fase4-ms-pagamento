@@ -62,7 +62,7 @@ public class GetPagamentosByStatusSteps {
     private Pagamento criarPagamento( ) {
         var pagamento = new Pagamento();
         pagamento.setStatus(Status.PENDENTE);
-        pagamento.setPedidoId(UUID.randomUUID());
+        pagamento.setPedidoId(String.valueOf(UUID.randomUUID()));
         pagamento.setDataDeCriacao(String.valueOf(LocalDateTime.now()));
 
         return pagamento;

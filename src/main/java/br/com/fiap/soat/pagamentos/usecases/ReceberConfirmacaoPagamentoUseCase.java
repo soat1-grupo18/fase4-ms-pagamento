@@ -9,7 +9,6 @@ import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPagamentoUseCasePort {
     private final PagamentosGatewayPort pagamentoGateway;

@@ -1,5 +1,4 @@
 package br.com.fiap.soat.pagamentos.exceptions;
-import java.util.UUID;
 
 public class PagamentoNaoEncontradoException extends RuntimeException {
     PagamentoNaoEncontradoException(String message) {
