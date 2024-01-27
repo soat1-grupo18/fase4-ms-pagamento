@@ -23,10 +23,10 @@ jobs:
       - infrastructure
     uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/java-microservice.yml@main
     with:
-      application-name: soat1-grupo18-ms-pedido
+      application-name: soat1-grupo18-ms-pagamento
       java-distribution: corretto
       java-version: "17"
       kubernetes-cluster-name: fiap-cluster
       kubernetes-manifest-directory-path: kubernetes
-      kubernetes-namespace: ms-pedido
+      kubernetes-namespace: ms-pagamento
     secrets: inherit

@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ms-pedido
+  name: ms-pagamento
   labels:
-    app: ms-pedido
+    app: ms-pagamento
   annotations:
     # docs: https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/rewrite/README.md
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -14,9 +14,9 @@ spec:
   - http:
       paths:
       - pathType: ImplementationSpecific
-        path: /ms-pedido(/|$)(.*)
+        path: /ms-pagamento(/|$)(.*)
         backend:
           service:
-            name: ms-pedido
+            name: ms-pagamento
             port: 
               number: 80

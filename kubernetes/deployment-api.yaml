@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms-pedido
+  name: ms-pagamento
   labels:
-    name: ms-pedido
+    name: ms-pagamento
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ms-pedido
+      app: ms-pagamento
   template:
     metadata:
       labels:
-        app: ms-pedido
+        app: ms-pagamento
     spec:
       containers:
-      - name: ms-pedido
-        image: pabloldias/soat1-grupo18-ms-pedido:latest
+      - name: ms-pagamento
+        image: pabloldias/soat1-grupo18-ms-pagamento:latest
         imagePullPolicy: IfNotPresent
         resources:
           requests:

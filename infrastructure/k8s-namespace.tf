@@ -1,5 +1,5 @@
-resource "kubernetes_namespace" "ms_pedido" {
+resource "kubernetes_namespace" "ms_pagamento" {
   metadata {
-    name = "ms-pedido"
+    name = "ms-pagamento"
   }
 }
