@@ -4,9 +4,9 @@ import java.util.UUID;
 
 public class ComandoDeConfirmacaoDePagamento {
     private final String action;
-    private final UUID pagamentoId;
+    private final String pagamentoId;
 
-    public ComandoDeConfirmacaoDePagamento(String action, UUID pagamentoId) {
+    public ComandoDeConfirmacaoDePagamento(String action, String pagamentoId) {
         this.action = action;
         this.pagamentoId = pagamentoId;
     }
@@ -15,7 +15,7 @@ public class ComandoDeConfirmacaoDePagamento {
         return action;
     }
 
-    public UUID getPagamentoId() {
+    public String getPagamentoId() {
         return pagamentoId;
     }
 }

@@ -24,7 +24,7 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
             throw ConfirmacaoDePagamentoInvalidaException.aPartirDaAction(action);
         }
 
-        UUID id = comandoDeConfirmacaoDePagamento.getPagamentoId();
+        String id = comandoDeConfirmacaoDePagamento.getPagamentoId();
 
         Optional<Pagamento> optPagamento = pagamentoGateway.obterPagamentoPorId(id);
 

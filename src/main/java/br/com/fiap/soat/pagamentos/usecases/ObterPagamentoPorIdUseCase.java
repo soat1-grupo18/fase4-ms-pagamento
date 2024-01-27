@@ -17,6 +17,6 @@ public class ObterPagamentoPorIdUseCase implements ObterPagamentoPorIdUseCasePor
 
     @Override
     public Optional<Pagamento> execute(String id) {
-        return pagamentoGateway.obterPagamentoPorId(UUID.fromString(id));
+        return pagamentoGateway.obterPagamentoPorId(id);
     }
 }

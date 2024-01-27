@@ -19,7 +19,7 @@ public class PagamentoDynamoEntity {
     private String id;
 
     @DynamoDBAttribute(attributeName = "pedidoId")
-    private UUID pedidoId;
+    private String pedidoId;
 
     @DynamoDBAttribute(attributeName = "total")
     private BigDecimal total;
@@ -51,11 +51,11 @@ public class PagamentoDynamoEntity {
     }
 
     @DynamoDbAttribute("pedidoId")
-    public UUID getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(UUID pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
 

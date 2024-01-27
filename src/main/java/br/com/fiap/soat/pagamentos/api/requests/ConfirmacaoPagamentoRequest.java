@@ -19,7 +19,7 @@ public class ConfirmacaoPagamentoRequest {
     private ConfirmacaoPagamentoDataRequest data;
 
     public ComandoDeConfirmacaoDePagamento toDomain() {
-        return new ComandoDeConfirmacaoDePagamento(this.getAction(), UUID.fromString(this.getData().getId()));
+        return new ComandoDeConfirmacaoDePagamento(this.getAction(), (this.getData().getId()));
     }
 
     public String getId() {
