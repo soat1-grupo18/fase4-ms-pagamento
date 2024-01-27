@@ -8,11 +8,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import org.junit.AfterClass;
-import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.context.annotation.Profile;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
@@ -25,8 +25,8 @@ import java.util.Arrays;
         "br.com.fiap.soat.pagamentos",
         "br.com.fiap.soat.pagamentos.acceptance.steps"
 })
-@EnableDynamoDBRepositories(basePackages = "br.com.fiap.soat.pagamentos.dynamodb.repositories")
 @TestConfiguration
+@EnableDynamoDBRepositories(basePackages = "br.com.fiap.soat.pagamentos.dynamodb.repositories")
 @Profile("test")
 public class TestConfig {
     public TestConfig() {
