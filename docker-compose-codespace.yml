@@ -9,16 +9,8 @@ services:
     restart: always
     ports:
       - 8083:8080
-    depends_on:
-      - db
     environment:
       - AWS_REGION=${AWS_REGION}
       - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
       - AWS_SECRET_KEY=${AWS_SECRET_KEY}
       - AWS_DYNAMODB_ENDPOINT=${AWS_DYNAMODB_ENDPOINT}
-  db:
-    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
-    restart: always
-    container_name: pagamento_dbhost
-    ports:
-      - 5435:5432
