@@ -62,6 +62,9 @@ jobs:
             -Dsonar.projectName=$SONAR_PROJECT_NAME \
             -Dsonar.projectVersion=$SONAR_PROJECT_VERSION
 
+      - name: Test print DELETE ME
+        run: cat $GITHUB_WORKSPACE/sonar-project.properties
+
       - name: Analyze with SonarCloud
         run: mvn -B sonar:sonar -Dsonar.projectKey=$SONAR_ORG:$SONAR_PROJECT_KEY
         env:
