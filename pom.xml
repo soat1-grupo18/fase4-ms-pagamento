@@ -17,8 +17,6 @@
 		<java.version>17</java.version>
 		<aws.java.sdk.version>2.23.9</aws.java.sdk.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.organization>${sonar.organization}</sonar.organization>
-		<sonar.projectKey>${sonar.projectKey}</sonar.projectKey>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -140,6 +138,24 @@
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.7.0.1746</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>${project.basedir}/sonar-project.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
