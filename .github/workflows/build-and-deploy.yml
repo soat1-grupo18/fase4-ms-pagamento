@@ -66,3 +66,6 @@ jobs:
         run: mvn -B sonar:sonar -Dsonar.projectKey=$SONAR_ORG:$SONAR_PROJECT_KEY
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ORG: ${{ secrets.SONAR_ORG }}
+          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+          DEFAULT_BRANCH: main
