@@ -62,10 +62,7 @@ jobs:
             -Dsonar.projectName=$SONAR_PROJECT_NAME \
             -Dsonar.projectVersion=$SONAR_PROJECT_VERSION
 
-      - name: Analyze with SonarCloud
-        run: mvn -B sonar:sonar -Dsonar.projectKey=$SONAR_ORG:$SONAR_PROJECT_KEY
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORG: ${{ secrets.SONAR_ORG }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          DEFAULT_BRANCH: main
