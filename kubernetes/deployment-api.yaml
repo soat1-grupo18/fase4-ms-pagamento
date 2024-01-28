@@ -1,48 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pagamentos
+  name: ms-pagamento
   labels:
-    name: pagamentos
+    name: ms-pagamento
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pagamentos
+      app: ms-pagamento
   template:
     metadata:
       labels:
-        app: pagamentos
+        app: ms-pagamento
     spec:
       containers:
-      - name: pagamentos
-        image: APPLICATION_IMAGE_HOLDER
+      - name: ms-pagamento
+        image: pabloldias/soat1-grupo18-ms-pagamento:latest
         imagePullPolicy: IfNotPresent
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "125m"
+            memory: "128Mi"
+            cpu: "100m"
           limits:
-            memory: "512Mi"
+            memory: "384Mi"
             cpu: "2000m"
-        env: 
-        - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://fiap-food-api.cr0dnn5xiohv.us-east-1.rds.amazonaws.com:5432/pagamentos
-        - name: SPRING_DATASOURCE_USERNAME
-          value: dbuser
-        - name: SPRING_DATASOURCE_PASSWORD
-          value: dbpassword
-        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-          value: update
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: AWS_SECRET_ACCESS_KEY
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: AWS_ACCESS_KEY_ID 
+        env:
+        - name: SERVER_PORT
+          value: "8080"
         ports:
         - containerPort: 8080

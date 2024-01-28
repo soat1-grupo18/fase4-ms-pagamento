@@ -5,9 +5,28 @@ on:
     branches:
       - 'main'
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  microservices-deploy:
-    uses: soat1-grupo18/fase3-reusable-github-workflows/.github/workflows/microservices-deploy.yml@main
+  infrastructure:
+    uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/aws-terraform.yml@main
     with:
-      microservice-id: soat1-grupo18-ms-pagamento
+      aws-region: us-east-1
+      terraform-directory-path: infrastructure
+      terraform-version: 1.7.0
+    secrets: inherit
+
+  java-microservice:
+    needs:
+      - infrastructure
+    uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/java-microservice.yml@main
+    with:
+      application-name: soat1-grupo18-ms-pagamento
+      java-distribution: corretto
+      java-version: "17"
+      kubernetes-cluster-name: fiap-cluster
+      kubernetes-manifest-directory-path: kubernetes
+      kubernetes-namespace: ms-pagamento
     secrets: inherit
