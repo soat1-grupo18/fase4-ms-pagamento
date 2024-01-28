@@ -34,6 +34,10 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      SONAR_ORG: ${{ secrets.SONAR_ORG }}
+      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+      SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -50,13 +54,15 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build with Maven
-        run: mvn -B clean verify
+      - name: Build with Maven and Pass Sonar Properties
+        run: |
+          mvn -B clean verify \
+            -Dsonar.organization=$SONAR_ORG \
+            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+            -Dsonar.projectName=$SONAR_PROJECT_NAME \
+            -Dsonar.projectVersion=$SONAR_PROJECT_VERSION
 
       - name: Analyze with SonarCloud
-        run: mvn -B sonar:sonar -Dsonar.projectKey=your-organization:your-project
+        run: mvn -B sonar:sonar -Dsonar.projectKey=$SONAR_ORG:$SONAR_PROJECT_KEY
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORG: ${{ secrets.SONAR_ORG }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
