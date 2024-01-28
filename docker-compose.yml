@@ -16,11 +16,6 @@ services:
       - AWS_ACCESS_KEY="$${{ secrets.AWS_ACCESS_KEY }}"
       - AWS_SECRET_KEY="$${{ secrets.AWS_SECRET_KEY }}"
       - AWS_DYNAMODB_ENDPOINT="$${{ secrets.AWS_DYNAMODB_ENDPOINT }}"
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://pagamento_dbhost:5432/pagamento_db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SERVER_PORT=8080
 
   db:
     image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
