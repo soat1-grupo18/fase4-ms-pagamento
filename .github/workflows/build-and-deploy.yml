@@ -54,7 +54,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build with Maven and Pass Sonar Properties
+      - name: Build with Maven
         run: |
           mvn -B clean verify \
             -Dsonar.organization=$SONAR_ORG \
@@ -66,6 +66,3 @@ jobs:
         run: mvn -B sonar:sonar -Dsonar.projectKey=$SONAR_ORG:$SONAR_PROJECT_KEY
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORG: $SONAR_ORG
-          SONAR_PROJECT_KEY: $SONAR_PROJECT_KEY
-          SONAR_PROJECT_NAME: $SONAR_PROJECT_NAME
