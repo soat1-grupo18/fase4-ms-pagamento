@@ -21,7 +21,7 @@ public class PagamentoMapperTest {
         entity.setPedidoId("Pedido123");
         entity.setTotal(new BigDecimal("70.50"));
         entity.setStatus(Status.APROVADO);
-        entity.setDataDeCriacao("2022-01-28T10:30:00Z");
+        entity.setDataDeCriacao("2024-01-28T10:30:00Z");
 
         Pagamento pagamento = PagamentoMapper.toDomain(entity);
 
@@ -29,7 +29,7 @@ public class PagamentoMapperTest {
         assertEquals("Pedido123", pagamento.getPedidoId());
         assertEquals(new BigDecimal("70.50"), pagamento.getTotal());
         assertEquals(Status.APROVADO, pagamento.getStatus());
-        assertEquals("2022-01-28T10:30:00Z", pagamento.getDataDeCriacao());
+        assertEquals("2024-01-28T10:30:00Z", pagamento.getDataDeCriacao());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class PagamentoMapperTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2022-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z"
         );
 
         PagamentoDynamoEntity entity = PagamentoMapper.toEntity(pagamento);
@@ -48,6 +48,6 @@ public class PagamentoMapperTest {
         assertEquals("Pedido123", entity.getPedidoId());
         assertEquals(new BigDecimal("70.50"), entity.getTotal());
         assertEquals(Status.APROVADO, entity.getStatus());
-        assertEquals("2022-01-28T10:30:00Z", entity.getDataDeCriacao());
+        assertEquals("2024-01-28T10:30:00Z", entity.getDataDeCriacao());
     }
 }

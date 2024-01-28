@@ -20,7 +20,7 @@ public class PagamentoDynamoEntityTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2022-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z"
         );
 
         PagamentoDynamoEntity dynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
@@ -29,7 +29,7 @@ public class PagamentoDynamoEntityTest {
         assertEquals("Pedido123", dynamoEntity.getPedidoId());
         assertEquals(new BigDecimal("70.50"), dynamoEntity.getTotal());
         assertEquals(Status.APROVADO, dynamoEntity.getStatus());
-        assertEquals("2022-01-28T10:30:00Z", dynamoEntity.getDataDeCriacao());
+        assertEquals("2024-01-28T10:30:00Z", dynamoEntity.getDataDeCriacao());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class PagamentoDynamoEntityTest {
         dynamoEntity.setPedidoId("Pedido123");
         dynamoEntity.setTotal(new BigDecimal("70.50"));
         dynamoEntity.setStatus(Status.APROVADO);
-        dynamoEntity.setDataDeCriacao("2022-01-28T10:30:00Z");
+        dynamoEntity.setDataDeCriacao("2024-01-28T10:30:00Z");
 
         Pagamento pagamento = dynamoEntity.toDomain();
 
@@ -47,6 +47,6 @@ public class PagamentoDynamoEntityTest {
         assertEquals("Pedido123", pagamento.getPedidoId());
         assertEquals(new BigDecimal("70.50"), pagamento.getTotal());
         assertEquals(Status.APROVADO, pagamento.getStatus());
-        assertEquals("2022-01-28T10:30:00Z", pagamento.getDataDeCriacao());
+        assertEquals("2024-01-28T10:30:00Z", pagamento.getDataDeCriacao());
     }
 }

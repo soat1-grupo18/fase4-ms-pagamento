@@ -21,7 +21,7 @@ public class PagamentoPresenterTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2022-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z"
         );
 
         PagamentoPresenter pagamentoPresenter = PagamentoPresenter.fromDomain(pagamento);
@@ -30,6 +30,6 @@ public class PagamentoPresenterTest {
         assertEquals("Pedido123", pagamentoPresenter.getPedidoId());
         assertEquals(new BigDecimal("70.50"), pagamentoPresenter.getTotal());
         assertEquals(Status.APROVADO, pagamentoPresenter.getStatus());
-        assertEquals("2022-01-28T10:30:00Z", pagamentoPresenter.getDataDeCriacao());
+        assertEquals("2024-01-28T10:30:00Z", pagamentoPresenter.getDataDeCriacao());
     }
 }
