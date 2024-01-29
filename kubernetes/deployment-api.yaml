@@ -34,11 +34,13 @@ spec:
           value: "dynamodb.sa-east-1.amazonaws.com"
         - name: AWS_ACCESS_KEY
           valueFrom:
-            name: aws-credentials
-            key: aws_access_key
+            secretKeyRef:
+              name: aws-credentials
+              key: aws_access_key
         - name: AWS_SECRET_KEY
           valueFrom:
-            name: aws-credentials
-            key: aws_secret_key
+            secretKeyRef:
+              name: aws-credentials
+              key: aws_secret_key
         ports:
         - containerPort: 8080
