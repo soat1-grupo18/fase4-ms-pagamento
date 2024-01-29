@@ -12,10 +12,7 @@ jobs:
   sonarCloud:
     name: SonarCloud
     runs-on: ubuntu-latest
-    env:
-      SONAR_ORG: ${{ secrets.SONAR_ORG }}
-      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-      SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -40,3 +37,8 @@ jobs:
 
       - name: Generate code coverage report
         run: mvn sonar:sonar -Pcoverage
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ORG: ${{ secrets.SONAR_ORG }}
+          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+          SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
