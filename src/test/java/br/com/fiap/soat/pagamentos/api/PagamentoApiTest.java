@@ -1,5 +1,6 @@
 package br.com.fiap.soat.pagamentos.api;
 
+import br.com.fiap.soat.pagamentos.api.requests.ConfirmacaoPagamentoDataRequest;
 import br.com.fiap.soat.pagamentos.api.requests.ConfirmacaoPagamentoRequest;
 import br.com.fiap.soat.pagamentos.api.requests.PagamentoRequest;
 import br.com.fiap.soat.pagamentos.config.CoreExceptionsAdvicer;
@@ -102,6 +103,10 @@ class PagamentoApiTest {
     @Test
     void receberConfirmacao() throws Exception {
         var request = new ConfirmacaoPagamentoRequest();
+        request.setAction("payment.created");
+        var dataRequest = new ConfirmacaoPagamentoDataRequest();
+        dataRequest.setId(UUID.randomUUID().toString());
+        request.setData(dataRequest);
 
         when(pagamentoController.receberConfirmacaoPagamento(any()))
                 .thenReturn("OK");
