@@ -28,5 +28,13 @@ spec:
         env:
         - name: SERVER_PORT
           value: "8080"
+        - name: AWS_REGION
+          value: "sa-east-1"
+        - name: AWS_DYNAMODB_ENDPOINT
+          value: "dynamodb.sa-east-1.amazonaws.com"
+        - name: AWS_ACCESS_KEY
+          value: "123"
+        - name: AWS_SECRET_KEY
+          value: "321"
         ports:
         - containerPort: 8080
