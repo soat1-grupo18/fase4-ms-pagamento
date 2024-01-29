@@ -72,3 +72,4 @@ Há um arquivo [insomnia-collection.yml](insomnia-collection.yml) na raiz do rep
 ### Event Storming
 
 Nosso *event storming* está disponível em um [board do Miro](https://miro.com/app/board/uXjVMHS5nec=/).
+
