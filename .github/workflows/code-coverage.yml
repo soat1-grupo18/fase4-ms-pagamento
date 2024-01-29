@@ -37,3 +37,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B clean verify
+
+      - name: Generate code coverage report
+        run: mvn sonar:sonar -Pcoverage
