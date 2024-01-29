@@ -10,3 +10,4 @@ resource "aws_dynamodb_table" "pagamentos" {
     type = "S"
   }
 }
+

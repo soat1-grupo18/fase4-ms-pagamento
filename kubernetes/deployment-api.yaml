@@ -33,8 +33,12 @@ spec:
         - name: AWS_DYNAMODB_ENDPOINT
           value: "dynamodb.sa-east-1.amazonaws.com"
         - name: AWS_ACCESS_KEY
-          value: "123"
+          valueFrom:
+            name: aws-credentials
+            key: aws_access_key
         - name: AWS_SECRET_KEY
-          value: "321"
+          valueFrom:
+            name: aws-credentials
+            key: aws_secret_key
         ports:
         - containerPort: 8080
