@@ -36,9 +36,4 @@ jobs:
         run: mvn -B clean verify
 
       - name: Generate code coverage report
-        run: mvn sonar:sonar -Pcoverage
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORG: ${{ secrets.SONAR_ORG }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}
+        run: mvn sonar:sonar -Pcoverage -Dsonar.login=${{ secrets.SONAR_TOKEN }}
