@@ -29,8 +29,8 @@ public class PagamentoApi {
     }
 
     @Operation(summary = "Obter pagamentos", description = "Retorna uma lista de pagamentos filtrada por status.")
-    @GetMapping("/pagamentos")
-    public ResponseEntity<List<PagamentoPresenter>> obterPagamentos(@RequestParam(name = "status", required = true) Status status) {
+    @GetMapping("/pagamentos/status/{status}")
+    public ResponseEntity<List<PagamentoPresenter>> obterPagamentos(@PathVariable(name = "status", required = true) Status status) {
         List<PagamentoPresenter> pagamentos;
 
         pagamentos = pagamentoController.obterPagamentosPorStatus(status);
