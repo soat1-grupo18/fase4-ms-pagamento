@@ -164,9 +164,7 @@
 							</formats>
 							<excludes>
 								<exclude>**/*config.*</exclude>
-								<exclude>src/main/java/br/com/fiap/soat/pagamentos/config</exclude>
 								<exclude>**/*Application.*</exclude>
-								<exclude>src/main/java/br/com/fiap/soat/pagamentos/PagamentosApplication.java</exclude>
 							</excludes>
 						</configuration>
 						</execution>
