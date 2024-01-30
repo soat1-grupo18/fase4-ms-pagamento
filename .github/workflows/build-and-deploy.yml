@@ -29,4 +29,5 @@ jobs:
       kubernetes-cluster-name: fiap-cluster
       kubernetes-manifest-directory-path: kubernetes
       kubernetes-namespace: ms-pagamento
+      sonar-project-key: soat1-grupo18_fase4-ms-pagamento
     secrets: inherit
