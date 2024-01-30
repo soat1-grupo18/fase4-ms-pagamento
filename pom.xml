@@ -135,35 +135,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.7.0.1746</version>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.11</version>
-				<executions>
-					<execution>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>coverage</id>
+			<build>
+				<plugins>
+					<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.7</version>
+					<executions>
+						<execution>
+						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-					</execution>
-					<execution>
+						</execution>
+						<execution>
 						<id>report</id>
 						<goals>
 							<goal>report</goal>
 						</goals>
 						<configuration>
 							<formats>
-								<format>XML</format>
-								<format>CSV</format>
+							<format>XML</format>
 							</formats>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+						</execution>
+					</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
