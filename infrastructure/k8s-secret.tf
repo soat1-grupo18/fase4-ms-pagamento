@@ -5,7 +5,7 @@ resource "kubernetes_secret" "example" {
   }
 
   data = {
-    aws_access_key = aws_iam_access_key.ms_pagamento.id # Bad practice. It should use IAM Role and OIDC.
+    aws_access_key = aws_iam_access_key.ms_pagamento.id     # Bad practice. It should use IAM Role and OIDC.
     aws_secret_key = aws_iam_access_key.ms_pagamento.secret # Bad practice. It should use IAM Role and OIDC.
   }
 
