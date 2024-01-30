@@ -1,0 +1,19 @@
+name: Update quality gates
+
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  java-quality:
+    uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/java-quality.yml@main
+    with:
+      java-distribution: corretto
+      java-version: "17"
+      sonar-project-key: soat1-grupo18_fase4-ms-pagamento
+    secrets: inherit
