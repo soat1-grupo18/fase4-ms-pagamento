@@ -163,7 +163,7 @@
 							<format>XML</format>
 							</formats>
 							<excludes>
-								<exclude>**/*Config.*</exclude>
+								<exclude>**/*config.*</exclude>
 								<exclude>**/*Application.*</exclude>
 							</excludes>
 						</configuration>
