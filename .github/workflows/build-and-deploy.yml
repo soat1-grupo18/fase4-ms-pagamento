@@ -10,7 +10,17 @@ permissions:
   contents: read
 
 jobs:
+  java-quality:
+    uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/java-quality.yml@main
+    with:
+      java-distribution: corretto
+      java-version: "17"
+      sonar-project-key: soat1-grupo18_fase4-ms-pagamento
+    secrets: inherit
+    
   infrastructure:
+    needs:
+      - java-quality
     uses: soat1-grupo18/fase4-reusable-github-workflows/.github/workflows/aws-terraform.yml@main
     with:
       aws-region: us-east-1
@@ -29,5 +39,4 @@ jobs:
       kubernetes-cluster-name: fiap-cluster
       kubernetes-manifest-directory-path: kubernetes
       kubernetes-namespace: ms-pagamento
-      sonar-project-key: soat1-grupo18_fase4-ms-pagamento
     secrets: inherit
