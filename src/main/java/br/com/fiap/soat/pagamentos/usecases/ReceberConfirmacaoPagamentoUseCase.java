@@ -3,18 +3,23 @@ package br.com.fiap.soat.pagamentos.usecases;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.exceptions.ConfirmacaoDePagamentoInvalidaException;
+import br.com.fiap.soat.pagamentos.interfaces.gateways.ProducaoGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
 import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPagamentoUseCasePort {
     private final PagamentosGatewayPort pagamentoGateway;
+    private final ProducaoGatewayPort producaoGateway;
 
-    public ReceberConfirmacaoPagamentoUseCase(PagamentosGatewayPort pagamentoGateway) {
+    public ReceberConfirmacaoPagamentoUseCase(PagamentosGatewayPort pagamentoGateway,
+                                              ProducaoGatewayPort producaoGateway) {
         this.pagamentoGateway = pagamentoGateway;
+        this.producaoGateway = producaoGateway;
     }
 
     public String execute(ComandoDeConfirmacaoDePagamento comandoDeConfirmacaoDePagamento) {
@@ -31,9 +36,8 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
             PagamentoDynamoEntity pagamento = PagamentoDynamoEntity.fromDomain(optPagamento.get());
             pagamento.setStatus(Status.APROVADO);
 
-            /* TO-DO:
-                request orders microservice to approve order
-            * */
+            producaoGateway.atualizarStatus(UUID.fromString(pagamento.getPedidoId()));
+
             return String.format("Pagamento %s confirmado", id);
         } else {
             throw new RuntimeException("Pagamento não foi encontrado.");

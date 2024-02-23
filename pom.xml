@@ -61,6 +61,10 @@
 			<version>7.15.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/dynamodb -->
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
